@@ -1,0 +1,2765 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                CASASOFT ObjectMatrix
+                 Tool di integrazione per sistemi FidoNet compatibili
+                                versione 2.00 per DOS
+
+
+
+                           (c) 1991-1992 Roberto Ceccarelli
+                            tutti i diritti sono riservati
+
+
+
+
+
+
+
+
+                          Manuale d'installazione e impiego
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+
+
+                                      ATTENZIONE
+
+
+                       LEGGERE ATTENTAMENTE QUESTE INFORMAZIONI
+                           PRIMA DI UTILIZZARE IL PROGRAMMA
+
+
+
+                    Questo programma e la sua documentazione sono
+                        Copyright 1991-1992 Roberto Ceccarelli
+                           Tutti i diritti sono riservati.
+              Ne sono consentiti l'uso e la distribuzione solo ai sensi
+                      della licenza riportata in questo manuale
+
+
+
+                         CASASOFT, ObjectMatrix e PrettyWoman
+                   sono marchi di proprieta' di Roberto Ceccarelli
+                  tutti gli altri marchi, registrati o meno, sono di
+               proprieta' dei rispettivi possessori elencati in questo
+                                       manuale.
+
+
+
+
+                            LIMITAZIONE DI RESPONSABILITA'
+              L'autore e chiunque altro in sua vece, non fornisce alcuna
+                   garanzia di alcun tipo, implicita od esplicita.
+                 Tutte le conseguenze relative all'uso del programma,
+                 inclusi danni materiali a cose o persone, perdite di
+             profitti o altri incidenti dovuti a questo programma o alla
+             sua documentazione sono a completo carico dell'utilizzatore
+              anche se viene avvisato del fatto che tali danneggiamenti
+                                   sono possibili.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        2
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                             BREVE STORIA DI OBJECTMATRIX
+
+             Questo programma nasce dalla necessita' di disporre di un
+             packer piu' rapido e semplice da usare del vecchio (benche'
+             efficiente) Dutchie che mi era stato dato assieme al
+             binkley.
+             Mio scopo era semplicemente fare dei pacchetti dei messaggi
+             senza necessita' di scheduling o routing, visto che come
+             point non ne avevo la necessita'.
+             La prima versione (che in realta' si chiamava IfnaPack) era
+             proprio brutale: basti pensare che gli indirizzi erano
+             hard-coded nel programma stesso.
+             Quando ebbi necessita' di fornire il software per dei point
+             che dovevo installare aggiunsi un piccolo file di
+             configurazione dove mettere indirizzo e fakenet, ma senza
+             alcuna indicazione.
+             Qualcuno mi fece notare che "l'interfaccia utente e' un po'
+             bruttina" ed in silenzio accolsi la sfida e mi scrissi una
+             unit per gestire in modo piu' completo il file di
+             configurazione.
+             Poi il mio boss mi chiese se era possibile fare qualcosa
+             per eliminare dall'area matrix tutti quei messaggi che
+             creano i packer per mandare la posta visto che gli venivano
+             segnalati dall'editor e lui, per non perdere i matrix
+             importanti, se li doveva leggere tutti sciupando del gran
+             tempo.
+             Poi si comincio' a parlare di "ricevute di ritorno" e
+             pensai bene di inserire anche questa feature.
+             Infine con l'uscita del BinkleyTerm 2.50 e' nata anche
+             l'esigenza delle nodelist a quattro dimensioni e anche
+             questa viene soddisfatta.
+             Cosi', un passo dopo l'altro, e' venuto fuori questo
+             programma che si propone di eliminare tutte quelle utility
+             che ingombrano gli hard disk, ognuna con la sua
+             configurazione e con compiti spesso sovrapposti.
+
+             Dalla versione 2 ObjectMatrix diventa lo strumento per
+             integrare funzionalmente i vari programmi necessari ad un
+             point o ad un bbs.
+             Una "centrale di comando" attraverso la quale controllare e
+             gestire tutto il traffico che transita sul proprio sistema.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        3
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                                       SOMMARIO
+
+             BREVE STORIA DI OBJECTMATRIX ................3
+             SOMMARIO ....................................4
+             CONTENUTO DELL'ARCHIVIO .....................5
+             PACCHETTI CORRELATI .........................6
+             LICENZA D'USO ...............................7
+             ALCUNI BUONI MOTIVI PER REGISTRARSI .........9
+             REQUISITI HARD/SOFT ........................10
+             INSTALLAZIONE ..............................11
+             Sezione [SYSTEM] ...........................13
+             Sezione [LOGFILE] ..........................15
+             Sezione [KILLFROM] .........................16
+             Sezione [NODELIST] .........................17
+             Sezione [QUICKBASE] ........................20
+             Sezioni [MACRO name] .......................21
+             Sezione [PACKER] ...........................22
+             Sezioni [SCHEDULE name] ....................23
+             Sezione [EXTERNALS] ........................24
+             COME USARE OBJECTMATRIX ....................25
+             Opzione Pack ...............................28
+             Opzione ForcePoll ..........................29
+             Opzione Rename .............................30
+             Opzione Reply ..............................30
+             Opzione Kill ...............................31
+             Opzione Renum ..............................31
+             Opzione Purge ..............................32
+             Opzione Post ...............................32
+             Opzione Attach .............................33
+             Opzione Request ............................33
+             Opzione Unpack .............................33
+             Opzione CleanOut ...........................33
+             Opzione Adjust .............................34
+             Opzione Remark .............................34
+             Opzione  Dump ..............................35
+             Opzione QuickBase Export ...................35
+             Opzione QuickBase Import ...................35
+             Opzione QuickBase Rescan ...................35
+             ESEMPI DI BATCH FILES ......................37
+             LO SHAREWARE ...............................42
+             Riconoscimenti .............................45
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        4
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+
+                               CONTENUTO DELL'ARCHIVIO
+
+             A partire dalla versione 2.00 il programma possiede delle
+             estensioni che gli consentono di operare al meglio sia con
+             il normale sistema DOS che con OS/2 2.x
+             A questo fine vengono forniti due programmi di
+             installazione (uno per DOS, l'altro per OS/2) che si
+             occupano di generare in forma corretta i seguenti files:
+
+
+             OM.EXE
+             Il file eseguibile del programma
+
+             OM.HLP
+             Il file con l'help ipertestuale
+
+             OM.HST
+             Elenco delle modifiche nelle varie versioni.
+
+             SAMPLE.INI
+             Esempio di file di configurazione.
+
+             OM.DOC
+             Questo file.
+
+             REGISTER.FRM
+             Modulo per la registrazione e relative istruzioni.
+
+             OM.VGA
+             Driver per schede VGA-compatibili
+
+             OM.CGA
+             Driver per schede CGA-compatibili
+
+             Qualora il pacchetto venga prelevato da un nodo delle rete
+             ISN (Italian Shareware Network) sara' presente anche un
+             file PROGRAM.ISN necessario per l'ammissione a tale
+             circuito.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        5
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                                 PACCHETTI CORRELATI
+
+             A partire dalla versione 2 non tutte le possibili
+             estensioni di ObjectMatrix sono comprese nel pacchetto
+             base, ma ci sono alcuni pacchetti accessori che possono
+             essere prelevate solo dagli interessati.
+
+             OM200OS2.ZIP
+             Contiene i files che realizzano l'integrazione con OS/2 2.x
+             e che permettono di sfruttare al meglio le caratteristiche
+             di questo interessante sistema operativo.
+             In particolare vengono settati gli attributi estesi in modo
+             da rendere disponibili le icone per la Workplace Shell e
+             poter gestire in maniera ottimale la sessione DOS in cui
+             girera' OM
+
+             OM200EGA.ZIP
+             Viene installato un driver particolare per la scheda EGA,
+             e' ovviamente utile solo a chi e' dotato di questo genere
+             di hardware.
+
+             Tali pacchetti sono reperibili attraverso gli stessi canali
+             del pacchetto principale e in particolare attraverso i bbs
+             ufficiali di supporto di ObjectMatrix:
+
+             AIR & HAM system    2:332/305.0@fidonet.org  +39-541-777003
+             Rainbow warrior!    2:332/312.0@fidonet.org  +39-541-777105
+
+
+             E' previsto a breve scadenza il rilascio di altre funzioni:
+             ne sara' data notizia attraverso le conferenze echomail
+             della rete fidonet.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        6
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                                    LICENZA D'USO
+
+             Questa licenza d'uso si applica a tutti i programmi
+             CASASOFT, eventuali eccezioni saranno riportate nella
+             documentazione.
+             Qualora le condizioni poste non fossero di vostro
+             gradimento vogliate distruggere la copia in vostro
+             possesso.
+
+
+             Questo non e' un programma di pubblico dominio, viene
+             distribuito nello spirito dello Shareware secondo il quale,
+             dopo un   periodo di valutazione (stabilito in un massimo
+             di TRENTA giorni),  l'utente e'  tenuto a  registrare la
+             sua  copia inviando all'autore una determinata cifra
+             stabilita, come misura minima, dallo stesso autore.
+
+             Il programma non e' a  vita limitata, esso  continuera'  a
+             funzionare anche senza  registrazione; tuttavia alcune
+             funzioni secondarie  sono  utilizzabili  solo  dopo  aver
+             richiesto la registrazione e ricevuto la relativa chiave.
+             Per la registrazione e' necessario compilare  e spedire
+             (anche via matrix) il  modulo che troverete incluso
+             nell'archivio  di distribuzione seguendo le istruzioni
+             allegate al medesimo.
+             Chiunque  puo'  redistribuire  il programma,  a  patto  che
+             lo   faccia nell'archivio originale nel quale  e' stato
+             rilasciato e  che non sia richiesta alcuna somma in cambio.
+             In  nessuna    circostanza  ne il programma, ne l'archivio
+             di distribuzione puo' essere modificato senza  il  consenso
+             dell'autore; l'unica modifica possibile e' quella
+             riguardante il formato di compressione dell'archivio (che
+             comunque deve contenere tutti e solo i files dell'archivio
+             originale).
+             E'  vietato altresi' includere anche  solo  parte  di
+             questo  programma o della sua documentazione in  altro
+             software.
+
+             E' PROIBITO DISTRIBUIRE LA PROPRIA CHIAVE PERSONALE
+
+             Il programma puo' essere usato  in organizzazioni
+             commerciali, ivi inclusi i bbs con accesso a pagamento
+             totale o parziale, solo  dopo regolare registrazione.
+
+             Questa  licenza  si  intende  accettata  in caso di
+             utilizzo  del programma (anche durante il periodo di
+             valutazione):  la sua  violazione comportera'  la decadenza
+             dei diritti di uso del programma.
+
+
+
+
+
+
+
+                                                                        7
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+             In nessun caso l'autore sara' ritenuto responsabile in
+             occasione di  perdite  di  dati, di danni a cose o a
+             persone, o  quant'altro relativo all'uso del programma;
+             nessuna garanzia implicita od esplicita e' fornita sul
+             funzionamento corretto  del programma ne della sua reale
+             utilizzabilita' da parte dell'utente.
+             L'unica funzione testata e' quella di occupare spazio sui
+             dischi.
+
+             Non viene garantito nessun supporto agli utenti, ma si
+             avra' un particolare riguardo per gi utenti registrati.
+             Per delucidazioni in merito a questa licenza, alle
+             procedure di registrazione e quant'altro inerente all'uso
+             del programma, nonche' per segnalazioni di bugs
+             (possibilmente ben documentati) o consigli contattare
+
+             Roberto Ceccarelli  fidonet 2:332/305.1
+             possibilmente in matrix, grazie.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        8
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                         ALCUNI BUONI MOTIVI PER REGISTRARSI
+
+             Provato un programma, e visto che si decide di utilizzarlo,
+             ci si scontra con l'obbligo morale di corrispondere la
+             cifra pattuita all'autore.
+
+             - Perche' dovrei sganciare dei soldi per un programma che
+             va lo stesso?
+             + Perche' in effetti utilizzi un programma monco, la
+             registrazione ti da modo di utilizzarlo a pieno e poiche'
+             la chiave sara' valida anche per tutte le prossime versioni
+             (che includeranno nuove opzioni) potrai apprezzarlo sempre
+             di piu'.
+
+             - Ma se a me va bene anche cosi'?
+             + Nel momento in cui attivi il programma automaticamente
+             sottoscrivi la licenza d'uso in cui sta scritto che puoi
+             utilizzare il programma a titolo di prova per un mese al
+             massimo: trascorso questo termine la stessa licenza prevede
+             tu invii il contributo.
+
+             - E se faccio il furbo?
+             + Continuerai a mandare in giro messaggi e pacchetti dove
+             sta scritto che non ti sei registrato facendo la figura
+             dello spilorcio, ma quel che e' peggio non incentiverai
+             questo tipo di distribuzione e soprattutto non mi
+             invoglierai a sviluppare nuove versioni del programma.
+             Ti troverai presto con un programma obsoleto e dovrai
+             perdere ancora tempo per cercarne un'altro, imparare ad
+             usarlo combattere con gli inevitabili bugs ecc...
+
+             - Quanto costa?
+             Poco: questa versione solo 25.000 lire (e se ci si associa
+             ci sono anche gli sconti!)
+
+             - Come si fa?
+             Si compila il modulo e si fa il versamento tramite la
+             propria banca o la posta e si spedisce il tutto.
+             Le istruzioni dettagliate sono nel modulo di registrazione
+             (file REGISTER.FRM)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        9
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                                 REQUISITI HARD/SOFT
+
+             ObjectMatrix non ha grandi pretese, per la memoria
+             potrebbero essere sufficienti 256k, ma se lo si usa in
+             interattivo o si intende usare qualche programma esterno
+             sarebbe bene averne di piu'.
+             Con OS/2 e' possibile settare VIDEO RESTRICTION = CGA per
+             ottenere circa 90k di memoria libera in piu'. (in tale caso
+             pero' si perde la possibilita' di visualizzare schermi a
+             43/50 linee)
+             Quanto al processore e' necessario almeno un V20 o un
+             80286.
+
+             I sistemi operativi supportati sono il Dos versione 3 o
+             superiore e OS/2 versione 2 o superiore.
+
+             Il programma fa ampio uso di overlay per ridurre la memoria
+             occupata in fase di escuzione: se si dispone di memoria EMS
+             ObjectMatrix e' in grado di sfruttarla riducendo
+             significativamente il tempo di accesso ai vari moduli
+             soprattutto nel caso si utilizzi l'interfaccia full-screen.
+             Con OS/2, utilizzando una sessione separata per
+             ObjectMatrix puo' essere conveniente riservargli circa 300k
+             di memoria EMS, mentre si possono azzerare la memoria XMS e
+             DPMI che non vengono utilizzate.
+             E' altresi' consigliabile avere definito nel proprio
+             CONFIG.SYS FILES=20 o piu'.
+
+             Qualora si utilizzi per compilare le nodelist e' necessaria
+             parecchia memoria centrale, in quanto tutti i dati verranno
+             caricati in memoria: non sara' possibile quindi compilare
+             la nodelist mondiale, ma per la region e qualche lista
+             personale non ci sono affatto problemi anche con soli 512k
+             La quntita' di memoria disponibile puo' essere letta
+             nell'ambiente a finestra sulla penultima riga in basso;
+             bisogna anche tenere conto che in modalita' batch si
+             dispone di circa 50kbytes di memoria libera in piu'.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       10
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                                    INSTALLAZIONE
+
+             Se si intende utilizzare il programma sotto il sistema
+             operativo OS/2 e' consigliabile prelevare il pacchetto con
+             le relative estensioni e installarle seguendo le istruzioni
+             loro allegate.
+
+             A questo punto, quale che sia il sistema operativo
+             utilizzato,  e' necessario creare o modificare, con un
+             qualsiasi editor per testi, il file OM.INI che conterra'
+             tutte le impostazioni necessarie ad ObjectMatrix per
+             lavorare.
+
+             Chi avesse gia' una vecchia versione di ObjectMatrix
+             precedente la 1.40 dovra' purtroppo ripetere
+             l'installazione a causa del differente formato del file,
+             per gli altri sono da gestire solo le nuove features.
+             Il cambiamento si e' reso necessario per poter gestire in
+             maniera piu' efficiente l'elevato numero di parametri
+             disponibili a partire da questa versione.
+
+             I vari parametri sono raggruppati per sezioni; la sezione
+             inizia con il proprio nome posto all'inizio della riga tra
+             una coppia di parentesi quadre.
+             Il termine di una sezione e' dato dall'inizio di una nuova
+             sezione o dalla fine del file.
+
+             Eventuali righe vuote o inizianti con il carattere di punto
+             e virgola (;) vengono ignorate dal parser e quindi possono
+             essere utilizzate per migliorare la leggibilita' del file e
+             per l'inserimento di commenti.
+             Una assegnazione puo' essere temporaneamente disattivata
+             semplicemente facendola precedere da un carattere di
+             commento.
+
+             Le sezioni attualmente utilizzate da ObjectMatrix sono:
+
+
+             * SYSTEM
+             Contiene i dati specifici del sistema: indirizzi, nome...
+
+             * LOGFILE
+             Per i parametri relativi al file di log.
+
+             * QUICKBASE
+             Definizioni per la gestione dell'omonima base messaggi
+
+             * NODELIST
+             Comandi di compilazione delle liste dei nodi
+
+
+
+
+
+
+                                                                       11
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+             * PACKER
+             Gestione del routing e scheduling comuni a tutti gli eventi
+
+             * SCHEDULE name
+             Gestione dei vari eventi posta
+
+             * KILL
+             Riservata alla funzione omonima
+
+             * EXTERNALS
+             Definizione dei programmi esterni
+
+             * MACRO name
+             Serie di sezioni che definiscono le varie macro
+             (sostituiscono i files *.oms delle versioni inferiori alla
+             1.40)
+
+             Possono poi essere presenti altre sezioni a scopo di
+             commento o a beneficio di altri programmi in grado di
+             leggere questo tipo di file di configurazione.
+             ObjectMatrix le ignorera'.
+
+             Nelle prossime pagine verranno descritte per esteso le
+             singole sezioni.
+
+             I controlli sugli statements sono case-insensitive (cioe'
+             possono essere usate indifferentemente maiuscole e
+             minuscole) e generalmente anche i parametri: le eventuali
+             eccezioni saranno messe in evidenza nelle singole
+             definizioni.
+             Tra statement e parametro possono essere lasciati degli
+             spazi per migliorare la leggibilita'.
+             Per gli esempi si puo' vedere il file SAMPLE.INI incluso
+             nel pacchetto.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       12
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                                   Sezione [SYSTEM]
+
+             Questa sezione deve essere obbligatoriamente presente
+             qualsiasi siano le funzioni richieste ad ObjectMatrix
+
+             * KEY=keycode
+             Specifica la chiave di registrazione, se non si e'
+             registrati si puo' omettere o commentare
+
+             * ADDRESS=mycompleteaddress
+             Indirizzo del point o bbs nella forma:
+             zone:net/node.point@domain
+             E' obbligatorio!
+             Serve anche per identificare il proprio boss o il proprio
+             uplink nella segunte maniera: se il numero di point e'
+             diverso da 0 allora il proprio uplink (o piu' propriamente
+             il proprio boss) e' calcolato come lo stesso indirizzo con
+             il numero di point azzerato.
+             Nel caso il numero di point sia gia' uguale a 0 allora si
+             assume di girare la posta al proprio network coordinator il
+             cui indirizzo si trova azzerando il numero di nodo.
+             Non si tiene conto di eventuali hub; inoltre se un nodo ha
+             gia' point e nodo uguali a 0 diventera' esso stesso il
+             proprio uplink: questa situazione puo' essere risolta
+             settando correttamente il parametro uplink nella sezione
+             del packer.
+
+             * POINTNET=fakenet
+             Serve per ricavare l'indirizzo in 2d del point nella forma
+             fakenet/point.
+             Per default e' 0
+             In Italia puo' essere specificato il parametro
+             REGION33POINTNET che attribuisce il numero di pointnet
+             secondo la normativa della region 33 nella forma 33x/yyy =>
+             2xyyy.
+
+             * AKA  mysuppladdress
+             Specifica un indirizzo alternativo per il proprio nodo.
+             Possono essere inserite piu' righe di aka.
+
+             * SYSOP  myname
+             Nome del sysop: viene inserito come mittente in tutti i
+             messaggi in partenza.
+             Obbligatorio!
+
+             * SYSTEM  systemname
+             Nome del bbs o point.
+             Obbligatorio!
+
+
+
+
+
+
+
+                                                                       13
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+             * MSGPATH  maildir
+             Directory in cui si trovano i messaggi matrix.
+             Obbligatorio!
+
+             * OUTBOUND  outdir
+             Directory in cui devono essere posti i pacchetti in
+             partenza.
+             Obbligatorio!
+
+             * INBOUND  indir
+             Directory in cui vengono depositati i pacchetti in arrivo.
+             Per default la dir corrente.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       14
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                                  Sezione [LOGFILE]
+
+
+             Qui vengono definiti i parametri per il file di Log, che
+             viene scritto in formato BinkleyTerm.  L'identificativo del
+             programma all'interno del log e' OBMA
+
+             * FILE  pathname
+             Nome e percorso del file di log che puo' essere comune
+             anche ad altri programmi purche' non in esecuzione
+             contemporanea.
+             Il file generato e' compatibile con quello di BinkleyTerm.
+             Se non specificato non viene generato alcun logfile.
+
+             * LEVEL  level
+             Livello di accuratezza del log; se omesso viene utilizzato
+             il massimo dettaglio.
+             Puo' essere specificato un numero od un simbolo secondo la
+             seguente tabella
+
+                    liv. sim. descrizione
+                     0    !   solo errori
+                     1    *   messaggi importanti
+                     2    +   messaggi statistici
+                     3    :   modo debug
+
+             * QUIET Yes|No
+             Se attivato sopprime i messaggi sullo schermo durante
+             l'esecuzione (viene pero' regolarmente scritto il logfile,
+             se richiesto)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       15
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                                  Sezione [KILLFROM]
+
+             I questa sezione vengono elencati (uno per riga) una serie
+             di mittenti, generalmente dei robot, i cui messaggi sono da
+             cancellare se diretti al proprio nodo (viene controllata
+             solo la prima parte del nome)
+             Se omessi viene definito ArcMail
+             Puo' essere specificata piu' di una riga di questo tipo
+             Il parametro in linea di comando li sostituisce tutti
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       16
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                                  Sezione [NODELIST]
+
+             La compilazione delle nodelist avviene semplicemente con il
+             comando OM NODELIST, cio' che invece necessita di
+             spiegazione e' il contenuto del file di configurazione.
+             Attenzione: nella versione attuale la compilazione avviene
+             tutta in memoria, pertanto non potra' essere compilata la
+             nodelist mondiale, ma solo liste piu' ridotte.
+             Il programma cerca nell'apposita directory, specificata
+             come indicato nel seguito, un file di testo denominato
+             NODELIST.nnn dove nnn e' un numero decimale di tre cifre
+             che dovrebbe indicare il giorno cui si riferisce la
+             nodelist stessa. Se vengono trovati piu' files con questi
+             nomi viene utilizzato quello il cui numero e' piu' elevato.
+
+             Di seguito sono elencate le opzioni da inserire in questa
+             sezione del file di configurazione e il loro significato.
+
+             * PATH path
+             Specifica il percorso dove si trovano le nodelist da
+             compilare e dove porre i dati compilati. Se non specificato
+             viene assunta la directory corrente.
+
+             * MYLIST pathname
+             Segmento di nodelist da aggiungere a quella principale;
+             puo' essere anche specificato un path se diverso da quello
+             della nodelist principale.
+             Poiche' ObjectMatrix gestisce le 4 dimensioni sono
+             accettate anche le keyword POINT; segue un esempio di
+             nodelist per definire i point di un sistema (nel caso
+             specifico quelli del nodo 332/305
+
+             Host,332,Boss_305,Rimini,Morigi,-Unp,9600,HST,V32,CM
+             ,305,Boss_305,Rimini,Morigi,-Unp-,9600,HST,V32,V42,CM
+             Point,1,OM_Support,Rimini,Roberto_Ceccarelli,-Unp-,2400
+             Point,2,Amiga_Point,Rimini,Andrea_Mansella,-Unp-,2400
+             ..
+
+             Il contenuto della linea HOST e di quella che definisce il
+             nodo 305 contengono dati fittizi che poi verranno scartati
+             in fase di compilazione perche' doppi.
+
+             * FORCEZONE  Yes|No
+             Le nodelist di region non portano in testa la definizione
+             di zona; questo problema viene spesso aggirato includendo
+             una nodelist personale con tale definizione. ObjectMatrix
+             puo' inserire automaticamente tale definizione, se
+             necessaria, con questo statement.
+
+
+
+
+
+
+
+                                                                       17
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+             * TEXTLIST  Yes|No
+             Se attivato viene prodotto un tabulato con i principali
+             dati dei vari nodi.
+
+             * FIDOUSER  Yes|No
+             Se attivato viene elaborato il file FIDOUSER.LST utilizzato
+             per localizzare un nodo a partire dal nome del sysop.
+
+             * VERSION6  Yes|No
+             Genera i files NODELIST.DAT e NODELIST.IDX nella versione
+             estesa che comprende anche i point.
+
+             * DEFAULTPREFIX prefix
+             Specifica il prefisso da aggiungere ai numeri telefonici
+             che non rientrano in quelli specificati dal parametro DIAL
+
+             * DIAL tiponumero [prefix]
+             Effettua sostituzioni nei numeri telefonici: serve ad
+             eliminare il prefisso internazionale nelle chiamate
+             nazionali e qualsiasi prefisso in quelle urbane.
+             Es. Dial 39- 0- sostituisce tutte le occorrenze di 39- con
+             0- permettendo le chiamate interurbane in Italia.
+             Dial 39-541- toglie tutti i prefissi dalle chiamate nel
+             distretto di Rimini.
+
+             * PASSWORD address passw
+             Assegna una password di sessione al nodo specificato. La
+             password e' case-insensitive e vengono considerati solo i
+             primi otto caratteri.
+
+             * DEFAULTCOST cost
+             Assegna il costo per default delle chiamate. Deve essere
+             specificato il costo di 1 minuto di collegamento
+             nell'unita' monetaria preferita.
+
+             * COST prefix cost
+             Assegna il costo al prefisso specificato. Permette al
+             mailer di stabilire se effettuare o meno certe chiamate in
+             determinati eventi.
+
+             * MODEMTYPE flag value
+             Permette di assegnare un valore ad ogni tipo di modem. Il
+             mailer utilizzando questi valori sara' in grado di
+             selezionare la stringa di chiamata piu' idonea.
+
+             * NODETYPE address value
+             Assegna al nodo indicato valori particolari in deroga a
+             quelli ricavabili dalla nodelist.
+
+             * NODECOST address cost
+             Assegna al nodo indicato un costo per la chiamata diverso
+             da quello ricavabile dal prefisso.
+
+
+
+
+                                                                       18
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+             * NODEPHONE address phonenum
+             Assegna al nodo indicato un numero telefonico diverso da
+             quello ricavabile dalla nodelist magari perche' non
+             pubblico. Fare attenzione che i numeri inseriti con questo
+             statement non vengono elaborati dalle tabelle dei prefissi.
+
+             * NODESYSOP address name
+             Sostituisce il nome del sysop del nodo indicato.
+
+             * NODENAME address name
+             Sostituisce il nome del sistema del nodo indicato.
+
+             * NODELOCATION address location
+             Sostituisce il sito del nodo indicato.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       19
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                                 Sezione [QUICKBASE]
+
+
+             Qualora si gestisca la base messaggi in formato QuickBBS si
+             puo' fare uso di una serie di opzioni per l'import e
+             l'export da questo formato a quello standard FTSC
+             utilizzato da ObjectMatrix per tutte le sue operazioni.
+             Sono sufficienti solo due parametri per utilizzare queste
+             funzioni.
+
+             * PATH  msgbasepath
+             Indica dove si trovano i files della quickbase
+
+             * NETMAILAREA  areanum
+             Specifica quale area e' utilizzata per i messaggi matrix
+             all'interno della base messaggi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       20
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                                 Sezioni [MACRO name]
+
+
+             Quando viene attivato ObjectMatrix deve eseguire una serie
+             di operazioni piuttosto complessa: deve leggere il file con
+             le definizioni dei messaggi personalizzati, interpretare il
+             file di configurazione, testare la presenza delle memoria
+             espansa attivare il sistema di overlay e tante altre.
+             Tutto questo richiede del tempo e quando si tratta di
+             eseguire in sequenza una serie di opzioni la cosa puo'
+             essere piuttosto fastidiosa.
+             Per ovviare a questo sono state predisposte le macro:
+             speciali sezioni del file di configurazione che contengono
+             la sequenza dei comandi da eseguire uno dopo l'altro senza
+             la necessita' di dover effettuare per ogni opzione tutte le
+             operazioni citate.
+             Sfortunatamente questa utilissima feature e' disponibile
+             solo per le versioni registrate.
+
+             Sostanzialmente si possono considerare come dei batch files
+             con i comandi di ObjectMatrix: contengono al loro interno i
+             comandi nella stessa forma in cui andrebbero scritti in un
+             batch tradizionale omettendo solo OM all'inizio.
+             Sono anche ammessi i parametri formali %1..%9 esattamente
+             come nei batch del DOS.
+
+             Un esempio che dimostra l'efficacia di questa feature e'
+             quello della mailing list descritta quando si e' parlato
+             dell'opzione POST. In quella occasione si consigliava di
+             realizzare un batch file: ora vedremo come si puo'
+             utilizzare una macro per avere la stessa funzione.
+             Con il vostro editor create nel file di configurazione
+             OM.INI una sezione di nome [MACRO MAILINGLIST] e inserite
+             delle righe del tipo
+             POST Angelo_Ghigi 2:332/312 %1 %2
+             infine se utilizzate ObjectMatrix come packer aggiungete
+             anche due righe
+             KILLPACKETS
+             PACK
+             A questo punto con il comando
+             OM MAILINGLIST Nuova_versione_ObjectMatrix ver140.doc
+             otterrete subito i messaggi impacchettati contenenti il
+             file ver140.doc come testo e "Nuova versione ObjectMatrix"
+             come soggetto ad una velocita' sconosciuta per chi usa i
+             batch tradizionali.
+
+             Nel file SAMPLE.INI fornito sono presenti gia' alcune macro
+             che potete sfruttare come esempi e base di partenza per le
+             vostre funzioni personalizzate.
+
+
+
+
+
+
+                                                                       21
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                                   Sezione [PACKER]
+
+             Questa sezione e' obbligatoria se si vuole usare il packer
+             di ObjectMatrix, ma per un point semplice, che colloquia
+             solo con il proprio boss puo' essere vuota! (anzi e' bene
+             che lo sia)
+
+             Per chi invece ha bisogno di funzioni piu' specifiche ecco
+             maggiori informazioni.
+
+             * BOSS  address
+             Il boss di un point, o l'uplink di un BBS vengono calcolati
+             come descritto alla voce ADDRESS; se l'indirizzo ottenuto
+             con quel metodo non e' quello desiderato puo' essere
+             sostituito con questo switch. In particolare puo' essere
+             utilizzato per ruotare la posta al proprio Hub o ad una
+             diversa linea del Boss
+
+             * UPLINK  address
+             Un sinonimo dell'opzione BOSS
+
+             * NOROUTE  address
+             I messaggi diretti all'indirizzo specificato non vengono
+             ruotati all'uplink ed i relativi pacchetti hanno priorita'
+             Normal
+
+             * HOLD  address
+             I messaggi diretti all'indirizzo specificato non vengono
+             ruotati all'uplink ed i relativi pacchetti hanno priorita'
+             Hold (cioe' vengono spediti solo se il destinatario chiama:
+             i point normalmente devono essere dichiarati Hold)
+
+             * CRASH  address
+             I messaggi diretti all'indirizzo specificato non vengono
+             ruotati all'uplink ed i relativi pacchetti hanno priorita'
+             Crash (cioe' vengono spediti immediatamente)
+
+             Questa versione ancora non supporta la possibilita' di
+             effettuare routing per nodi diversi dal proprio uplink: il
+             codice e' gia' predisposto per questa funzione, ma sara'
+             attivata solo dalla prossima versione perche' ancora in
+             fase di test.
+             Sempre dalla prossima versione sara' data la possibilita'
+             di gestire le wildcards negli indirizzi.
+
+
+
+
+
+
+
+
+
+
+
+                                                                       22
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+
+                               Sezioni [SCHEDULE name]
+
+
+
+             Descrivono informazioni aggiuntive a quelle specificate
+             nella sezione [PACKER] e vengono lette solo se viene
+             indicato lo specifico evento.
+
+             I parametri utilizzabili sono gli stessi gia' descritti
+             precedentemente.
+             La priorita' di un nodo non puo' essere ridefinita in
+             queste sezioni, mentre puo' essere ridefinito il boss (o
+             uplink)
+
+             Una descrizione completa della procedura di packing e
+             dell'utilizzo degli switch relativi sara' data piu' avanti
+             nella descrizione della funzione PACK.
+
+             Eventuali suggerimenti per miglioramenti a questa sezione
+             sono molto graditi!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       23
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                                 Sezione [EXTERNALS]
+
+             In questa sezione vanno elencati i programmi esterni
+             lanciabili all'interno dell'ambiente interattivo.
+
+             Puo' trattarsi di editor per testi, lettori di messaggi,
+             echomail processors e quant'altro sia ritenuto utile.
+
+             I programmi disponibili saranno selezionabili da una
+             finestra richiamabile dal menu di sistema e saranno
+             identificati da un nome descrittivo (che puo' contenere
+             anche degli spazi)
+
+             La sintassi delle righe di questa sezione e'
+
+             nome_descrittivo = riga_di_comando [parametri...]
+
+
+             Questa comoda funzionalita' e' riservata ai soli utenti
+             registrati: gli altri possono usare la sola shell al
+             processore dei comandi (che e' gia' definita nel menu di
+             sistema e quindi non deve essere dichiarata in questa
+             sezione salvo casi particolari come ad esempio l'uso
+             contemporaneo di 4dos e command.com)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       24
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                               COME USARE OBJECTMATRIX
+
+             Il programma puo' essere usato in due modalita': interativa
+             e batch.
+             Questo manuale non trattera' del'uso dell'interfaccia
+             interattiva in quanto estremamente intuitiva, si consideri
+             inoltre che i comandi disponibili sono i medesimi
+             disponibili in modalita' batch, oltre ad alcune funzioni
+             specifiche che non avrebbero senso in modalita' batch, e
+             quindi ci si potra' sempre riferire a questo mauale per
+             informazioni piu' dettagliate oppure consultare l'help in
+             linea, sensibile al contesto, e attivabile mediante il
+             tasto F1.
+             Per entrare in modalita' interattiva e' sufficiente
+             chiamare il programma con OM.
+
+             Per utilizzare ObjectMatrix in modo batch (ad esempio in
+             eventi di manutenzione) si deve usare la sintassi:
+             OM opzione [parametri...]
+             dove le opzioni disponibili sono le seguenti.
+
+             * PACK
+             crea i pacchetti dei messaggi in partenza
+
+             * FORCEPOLL
+             crea un pacchetto vuoto per forzare la chiamata
+
+             * CLEANOUT
+             cancella i messaggi di attach spediti dal mailer
+
+             * KILLPACKETS
+             cancella tutti i pacchetti creati da OM
+
+             * PACKETLIST
+             crea un file di testo con il contenuto dei pacchetti
+             generati dal packer di OM
+
+             * UNPACK
+             importa i pacchetti
+
+             * RENAME
+             cambia il nome del destinatario nei msg in arrivo
+
+             * REPLY
+             genera le "ricevute di ritorno"
+
+             * POST
+             per creare un messaggio
+
+             * ATTACH
+             genera un file/attach
+
+
+
+
+                                                                       25
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+             * REQUEST
+             genera un file/request
+
+             * KILL
+             cancella i messaggi con determinato mittente
+
+             * RENUM
+             rinumera i messaggi a partire da 1
+
+             * PURGE
+             per ripulire l'area matrix dai mesaggi spediti o non piu'
+             necessari
+
+             * ADJUST
+             sistema nell'header del messaggio zona e point basandosi
+             sul contenuto dei kludge.
+
+             * NODELIST
+             compila la nodelist
+
+             * REMARK
+             inserisce una nota nel logfile
+
+             * DUMP MESSAGES
+             crea un file di testo con il contenuto di tutti i messaggi
+             matrix presenti
+
+             * DUMP INBOUND
+             crea un file di testo con il contenuto dei pacchetti
+             presenti nella directory di inbound.
+
+             * DUMP OUTBOUND
+             crea un file di testo con il contenuto dei pacchetti
+             presenti nella directory di outbound.
+
+             * QUICKBASE EXPORT
+             converte i messaggi da formato QuickBBS in formato FTSC
+
+             * QUICKBASE IMPORT
+             converte i messaggi da formato FTSC in formato QuickBBS
+
+             * QUICKBASE RESCAN
+             estrae tutti messaggi matrix locali dalla QuickBase
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       26
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+             E' inoltre disponibile lo switch /? in modo da assicurare
+             una maggiore uniformita' d'uso con il DOS 5
+             Se invece si richiede OM opzione ? verra' mostrato l'help
+             relativo a quella determinata funzione.
+             Quando si richiama l'help da linea di comando DOS il
+             programma entra in modo interattivo automaticamente.
+             Nelle prossime pagine saranno descritte in dettaglio le
+             varie opzioni disponibili.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       27
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+
+                                     Opzione Pack
+
+
+             Uso:  PACK [schedulename]
+
+             Prepara i pacchetti di posta, i file attach e i file
+             request da utilizzarsi in un ambiente tipo BinkleyTerm.
+
+             Il routing segue le seguenti regole:
+             - I file requests sono impacchettati direttamente per il
+             nodo di destinazione; vengono rifiutati se il nodo mittente
+             risulta diverso dal proprio.
+             L'eventuale testo del messaggio non viene trasmesso.
+
+             - I messaggi in partenza dal proprio nodo con priorita'
+             diversa da Normal sono impacchettati direttamente per il
+             nodo di destinazione con la priorita' assegnata.
+             Nel caso di messaggio crash diretto ad un point questo
+             verra' ruotato al relativo boss
+
+             - I messaggi con priorita' Normal e tutti i messaggi
+             provenienti da altri nodi subiscono questi trattamenti:
+             -- Se il nodo di destinazione e' indicato nelle liste dei
+             Crash, NoRoute od Hold viene impacchettato per il suddetto
+             nodo con la priorita' richiesta.
+             Fare attenzione che in questo caso e' possibile mandare
+             messaggi crash direttamente ai point senza redirezione al
+             boss!
+             -- Se il nodo di destinazione non e' specificato in nessuna
+             di queste liste allora il messaggio viene inviato
+             all'uplink con la priorita' eventualmente assegnata a
+             quest'ultimo (se invece non viene assegnata alcuna
+             priorita' all'uplink si considera in Normal)
+
+             I messaggi cui e' attaccata l'arcmail non vengono
+             impacchettati, ma viene spedito il relativo file. Essi
+             vengono individuati controllando l'estensione del file
+             attaccato che nel caso specifico e' nella forma
+             mo?|tu?|we?|th?|fr?|sa?|su?
+
+             Nei messaggi di file request e di attach e' possibile
+             specificare piu' di un file da richiedere o da trasmettere.
+
+             Qualora fossimo nella necessita' di forzare una chiamata
+             verso un nodo anche se non c'e' posta in partenza potra'
+             essere utilizzata la funzione FORCEPOLL descritta piu'
+             avanti.
+
+
+
+
+
+
+
+                                                                       28
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+             Attenzione: ogni volta che viene lanciato il packer vengono
+             analizzati tutti i messaggi presenti nella directory della
+             posta, gia' processati o meno, ed aggiunti agli eventuali
+             pacchetti gia' presenti.
+             E' quindi NECESSARIO far precedere ogni chiamata di questa
+             funzione dalla funzione KILLPACKETS
+             La cosa piu' efficiente e sicura e' creare una macro del
+             tipo:
+
+             [MACRO REBUILD]
+             KillPackets
+             Renum
+             Pack %1
+
+             che potra' essere chiamata dal batch di gestione del bbs o
+             del point con:
+
+             OM REBUILD [schedulename]
+
+             e che effettuera' tutte le operazioni richieste senza
+             possibilita' di errori.
+
+
+
+                                  Opzione ForcePoll
+
+
+             Uso: FORCEPOLL  node
+
+             Il parametro e' obbligatorio
+
+             Crea un pacchetto vuoto con priorita' CRASH per il nodo
+             indicato; se e' gia' presente un pacchetto con tale
+             priorita' per quel nodo il comando non ha effetto.
+
+             Serve a forzare chiamate in automatico durante gli eventi
+             posta; il pacchetto viene rimosso o dal mailer quando
+             effettua la chiamata o dalla funzione KILLPACKETS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       29
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+
+                                    Opzione Rename
+
+
+             uso: RENAME [original_name [new_name]]
+
+             Se new_name viene omesso si usa per default il nome del
+             sysop; se new_name viene utilizzato bisogna specificare
+             anche original_name; se original_name viene omesso viene
+             utilizzato 'SysOp' per default.
+             I controlli di original_name sono fatti in modo case-
+             insensitive.
+             Se si utilizza una versione non registrata i parametri in
+             linea di comando sono ignorati.
+
+             Se e' necessario inserire degli spazi questi vanno
+             sostituiti da tratti di sottolineatura (_).
+
+
+             Questa opzione e' stata realizzata in particolare per
+             l'utilizzo assieme alle note utilities MBUtil che importano
+             i messaggi matrix nella QuickBase solo se indirizzati al
+             nome del sysop e non semplicemente a SysOp o che altro.
+             Si rischia spesso di non vedere questi messaggi che a volte
+             potrebbero anche essere importanti: con questa utility si
+             dovrebbe poter importare tutto.
+             Comunque e' consigliabile fare l'import nella base messaggi
+             quick utilizzando l'apposita funzione di ObjectMatrix che
+             controlla solo l'indirizzo del destinatario.
+
+
+
+                                    Opzione Reply
+
+
+             Non richiede parametri.
+
+             I messaggi generati hanno come mittente il nome del SysOp e
+             come destinatario il mittente originale.
+
+             Sono posti nella directory della posta per essere
+             successivamente impacchettati.
+
+
+             Leggendo le specifiche FTS-1 si nota come sia definita una
+             coppia di bit che permettono di gestire un sistema di
+             "ricevute di ritorno" per i messaggi matrix.
+             Questa opzione controlla se un messaggio diretto al nostro
+             nodo ha il bit di richiesta settato e se cosi' e' crea un
+             breve messaggio di risposta per il mittente con il
+             corrispondente bit di risposta settato (e senza chiedere
+
+
+
+
+                                                                       30
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+             ulteriori conferme).
+             E' molto utile per sapere se un messaggio e' arrivato a
+             destinazione o si e' perso per strada ed eventualmente
+             quanto tempo ha impiegato ad arrivare.
+
+             Poiche' alcuni mail processor cancellano i suddetti bit
+             vengono generate le risposte anche per quei messaggi che
+             nel subject riportino, in qualsiasi posizione, la stringa
+             '*RR*' (ovviamente senza apici).
+
+             Nel messaggio originale viene inserito un kludge che
+             notifica l'avvenuta spedizione della ricevuta.
+
+
+
+                                     Opzione Kill
+
+
+             Uso: KILL [mittente]
+
+             Cancella tutti i messaggi pervenuti con mittente indicato.
+             Se il parametro manca (oppure si usa una versione non
+             registrata) si usano i nomi definiti nell'apposita sezione
+             del file di configurazione e se non specificato niente
+             "ArcMail" per default
+
+             I controlli sono case-insensitive, riguardano solo la parte
+             iniziale della stringa ed eventuali spazi vanno indicati
+             con il carattere di sottolineatura
+
+
+             Viene utilizzata per evitare che l'area matrix venga
+             riempita da tutti quei messaggi che i mail processors
+             creano per spedire i pacchetti compressi di posta oppure
+             programmi come Kick che nel nostro nodo utilizziamo per
+             spedire le nodelist aggiornate.
+             Questi messaggi vengono cancellati in quanto di nessuna
+             utilita' per chi li riceve.
+
+
+
+                                    Opzione Renum
+
+
+             Non richiede parametri
+
+             Rinumera a partire da 1 i messaggi nell'area definita nel
+             file di configurazione.
+             A differenza di altre utility similari che devono essere
+             modificate a seconda della versione di DOS in uso perche'
+             accedono direttamente alle strutture interne dei dischi
+             ObjectMatrix effettua questa operazione servendosi dei
+
+
+
+
+                                                                       31
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+             servizi del DOS potendo cosi' operare in qualsiasi ambiente
+             senza problemi.
+
+             Attenzione: questa funzione non aggiorna i puntatori
+             gestiti dalla funzione PACK, per cui e' indispensabile
+             cancellare i pacchetti con la funzione KILLPACKETS prima di
+             utilizzarla; i pacchetti saranno poi ricostruiti (assieme
+             ai loro indici) da un successivo PACK
+
+
+
+
+                                    Opzione Purge
+
+
+             Uso: PURGE S[ent] | R[eceived]
+
+             Cancella i messaggi che presentano settato il flag
+             specificato sulla linea di comando.
+             Il nome del flag puo' essere abbreviato fino a diventare la
+             sola iniziale, inoltre il controllo e' case-insensitive.
+             Non e' fatto alcun ulteriore controllo sui messaggi.
+
+
+
+                                     Opzione Post
+
+
+             Uso: POST destinatario indirizzo soggetto file
+
+             Tutti i campi sono obbligatori.
+             Eventuali spazi vanno indicati con il carattere di
+             sottolineatura.
+
+
+             Puo' essere utile per spedire automaticamente dei messaggi
+             di servizio, statistiche, avvisi di nuovi files ecc.
+             Io la utilizzo per gestire la mailing list degli utenti di
+             ObjectMatrix con un batch file formato da tante righe del
+             tipo:
+             OM POST Angelo_Ghigi 2:332/312 %1 %2
+             Supposto che il batch si chiami MList.bat e che voglia
+             spedire a tutti il contenuto del text file VER140.DOC
+             specificando come subject "Nuova versione OM" chiamero'
+             MLIST Nuova_versione_OM ver140.doc
+             e automaticamente tutti gli interessati riceveranno il
+             matrix.
+
+             A proposito di mailing list: se desiderate essere inclusi
+             non dovete fare altro che chiederlo. Sara' mia cura
+             inviarvi tutti gli avvisi delle nuove uscite o
+             comunicazioni importanti riguardanti ObjectMatrix.
+
+
+
+
+                                                                       32
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                                    Opzione Attach
+
+
+             Uso ATTACH address filename priority
+
+             Tutti i campi sono obbligatori.
+             Viene utilizzato per fare il forward di files attraverso
+             files batch: particolarmente utile per spedire la nodelist
+             ai downlink.
+
+
+
+
+                                   Opzione Request
+
+
+             Uso: REQUEST address filename
+
+             Tutti i campi sono obbligatori.
+             Come sopra permette di automatizzare i files request.
+
+
+
+                                    Opzione Unpack
+
+
+             Non richiede parametri.
+
+             Cerca tutti i files con estensione .PKT presenti nella dir
+             di inbound ed estrae i messaggi contenuti nella directory
+             della matrix (anche se si tratta di messaggi echomail)
+             Verra' indicato anche il programma che ha generato il
+             pacchetto (purche' questo sia presente nel documento
+             FTSCPROD).
+
+
+
+
+                                   Opzione CleanOut
+
+
+             Non richiede parametri
+
+             Cancella i messaggi spediti che non sono stati cancellati
+             al momento del packing, in particolare gli attach
+             dell'echomail.
+             Deve essere utilizzata dopo ogni spedizione di posta
+             effettuata dal mailer.
+
+             Fare attenzione che tale utility non e' compatibile con
+             altre utility simili in quanto adotta un formato e una
+
+
+
+
+                                                                       33
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+             logica diversa: puo' essere utilizzata solo in connessione
+             con il packer di ObjectMatrix versione 1.40 o superiori.
+             Anche la funzione CLEANOUT presente nelle versioni piu'
+             vecchie di OM e' incompatibile con questa.
+
+
+
+                                    Opzione Adjust
+
+
+             Non richiede parametri.
+
+             La release 15 del documento FTS-0001 prevede che in alcune
+             word dell'header siano scritti la zona e il point degli
+             indirizzi di partenza e destinazione.
+             Poiche' parecchi programmi non sono aggiornati in tal senso
+             o utilizzano queste word per altri usi possono causare
+             malfunzionamenti a questo programma. Nella migliore delle
+             ipotesi vedrete gli header dei messaggi con zone e numeri
+             di point piuttosto fantasiosi; in altri casi piu'
+             sfortunati potreste trovare il vostro mailer che sta
+             chiamando in Australia o chissa' dove.
+             I programmi che conosco facciano questo sono Qmail e Lora
+             nonche' tutti quelli che non lavorano a 4d.
+             E' quindi consigliabile sistemare i messaggi dopo ogni uso
+             di questi programmi.
+
+
+
+
+                                    Opzione Remark
+
+
+             Uso: REMARK [annotazione]
+
+             Inserisce una riga nel logfile con il testo specificato nel
+             parametro (una riga vuota se nulla e' specificato)
+
+             Gli eventuali spazi vanno indicati con il carattere di
+             sottolineatura
+
+             Puo' essere utile per commentare il logfile ad esempio
+             segnalando l'inizio dell'evento di manutenzione del bbs con
+             la linea "Inizio evento manutenzione".
+             Cio' si ottiene con il comando
+             OM REMARK Inizio_evento_manutenzione
+
+
+
+
+
+
+
+
+
+
+                                                                       34
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+                                    Opzione  Dump
+
+
+             Non richiede parametri
+
+             Viene creato un file testo denominato MAILDUMP.OM che
+             contiene l'header decodificato e il testo di tutti i
+             messaggi presenti nell'area matrix.
+             E' stato inserito per effettuare operazioni di debugging in
+             un'area che normalmente non e' visibile dagli editor che
+             lavorano su basi messaggi evolute.
+
+
+                               Opzione QuickBase Export
+
+
+             Non richiede parametri
+
+             Copia tutti i messaggi dell'area matrix della QuickBase con
+             il flag di pending export attivato nella directory dei
+             messaggi gestita da ObjectMatrix.
+
+             Il messaggio originale non viene modificato salvo il flag
+             di pending export che viene azzerato.
+
+
+
+                               Opzione QuickBase Import
+
+
+             Non richiede parametri
+
+             Copia tutti i messaggi diretti al prorpio nodo (Aka
+             inclusi) nell'area matrix della QuickBase.
+             Il fatto di basarsi solo sull'indirizzo e non anche sul
+             nome permette di far utilizzare il servizio di netmail
+             anche agli utenti di programmi di bbs che usano solo la
+             base messaggi in formato QuickBBS
+
+             Il messaggio originale non viene cancellato.
+
+
+
+                               Opzione QuickBase Rescan
+
+
+             Non richiede parametri
+
+             Copia tutti i messaggi dell'area matrix della QuickBase con
+             il flag di Local attivato nella directory dei messaggi
+             gestita da ObjectMatrix.
+
+
+
+
+
+                                                                       35
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+             Il messaggio originale non viene modificato.
+
+             Attenzione: usare questa opzione con molta cautela in
+             quanto puo' generare grandi quantita' di duplicati; e'
+             stata sviluppata a scopo di debug ed e' stata inserita solo
+             per particolari servizi di manutenzione straordinaria.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       36
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                                ESEMPI DI BATCH FILES
+
+
+             Il seguente batch file (scritto per la shell 4DOS) gestisce
+             l'editing e il packing dei messaggi sul mio point.
+
+
+             @echo off
+             cls
+             pushd
+
+             Rem --------------------------------------------------
+             Rem   CASASOFT ObjectMatrix v.1.40
+             Rem   (c) 1991-1992 Roberto Ceccarelli
+             Rem
+             Rem   4DOS batch file per gestione editor (Golded)
+             Rem   e mail processor (Wmail)
+             Rem --------------------------------------------------
+
+
+             :GOLDRUN
+             cd \point\golded
+             GOLDED
+
+             If ErrorLevel 101 Goto ERROR
+             If ErrorLevel 100 Goto REBUILD
+             If ErrorLevel 008 Goto ERROR
+
+             If ErrorLevel 006 Goto E_N__
+             If ErrorLevel 004 Goto E____
+             If ErrorLevel 002 Goto __N__
+
+             Goto END
+
+             Rem --------------------------------------------------
+             Rem   Errore Golded: abort!
+             Rem --------------------------------------------------
+
+             :ERROR
+             Echo GoldED Error exit!
+             Goto END
+
+             Rem --------------------------------------------------
+             Rem   Ricostruzione base messaggi
+             Rem --------------------------------------------------
+
+             :REBUILD
+             Echo ERROR! The QBBS index files needs rebuilding!
+             cd \point\mbutil
+             MBUTIL Index -Recover -Delete Goto GOLDRUN
+
+
+
+
+
+                                                                       37
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+             Rem --------------------------------------------------
+             Rem   Inseriti messaggi echo e matrix
+             Rem --------------------------------------------------
+
+             :E_N__
+             Echo  New Echomail & NetMail entered!
+             cd \point\om
+             om quickbase export
+
+             Rem --------------------------------------------------
+             Rem   Inseriti solo messaggi echo
+             Rem --------------------------------------------------
+
+             :E____
+             Echo  New Echomail entered!
+             cd \point\wmail
+             wmail export -K -T
+             goto pack
+
+             Rem --------------------------------------------------
+             Rem   Inseriti solo messaggi matrix
+             Rem --------------------------------------------------
+
+             :__N__
+             Echo  New Netmail entered!
+             cd \point\om
+             om quickbase export
+
+             Rem --------------------------------------------------
+             Rem   Packer messaggi matrix e attach
+             Rem --------------------------------------------------
+
+             :PACK
+             cd \point\om
+             cls
+             om killpackets
+             om pack
+
+             Rem --------------------------------------------------
+             Rem   Ripristina directory iniziale e termina
+             Rem --------------------------------------------------
+
+             :END
+             popd
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       38
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+             Questo batch gestisce il mailer, l'unpacking dei messaggi,
+             la creazione delle ricevute di ritorno e la compilazione
+             della nodelist sul mio point
+
+             @echo off
+             cls
+
+             Rem --------------------------------------------------
+             Rem   CASASOFT ObjectMatrix v.1.20
+             Rem   (c) 1991 Roberto Ceccarelli
+             Rem
+             Rem   4DOS batch file per BinkleyTerm + Wmail
+             Rem --------------------------------------------------
+
+
+             Rem --------------------------------------------------
+             Rem   attiva Fossil,VideoFossil e BinkleyTerm
+             Rem --------------------------------------------------
+
+             pushd
+             cd \point\binkley
+             bnu /T=512 /R=3072
+             video_f
+             bt
+             if errorlevel 254 goto error
+             if errorlevel 200 goto mail
+             goto quit
+
+             Rem --------------------------------------------------
+             Rem   errore del binkley: abort.
+             Rem --------------------------------------------------
+
+             :error
+             echo  Errore BinkleyTerm: procedura interrotta!
+             goto quit
+
+             Rem --------------------------------------------------
+             Rem   procedura di import della posta
+             Rem --------------------------------------------------
+
+             :mail
+             video_d
+             bnu /u
+             cd \point\om
+             cls
+             om cleanout
+             om unpack
+             cd \point\wmail wmail import -D
+             cd \point\om
+             if not exist \point\mail\*.msg goto nodelist
+             cls
+             om kill
+
+
+
+
+                                                                       39
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+             Rem --------------------------------------------------
+             Rem   se non sono stati ricevuti messaggi matrix
+             Rem   utili salta al controllo nodelist
+             Rem   altrimenti genera le ReturnRequest
+             Rem --------------------------------------------------
+
+             if not exist \point\mail\*.msg goto nodelist
+             cls
+             om rename
+             om reply
+
+             Rem --------------------------------------------------
+             Rem   se sono stati generati messaggi li impacchetta
+             Rem --------------------------------------------------
+
+             if not errorlevel 1 goto import
+             om killpackets
+             om pack
+
+             Rem --------------------------------------------------
+             Rem   importa messaggi nella QuickBase
+             Rem --------------------------------------------------
+
+             :import
+             cd \point\om
+             om quickbase import
+
+             Rem --------------------------------------------------
+             Rem   se e' arrivata una nodelist aggiornata la
+             Rem   compila per il Binkley e per Golded
+             Rem --------------------------------------------------
+
+             :nodelist
+             cd \point\nodelist
+             if not exist \point\inbound\region33.zip goto fine
+             move \point\inbound\region33.zip
+             del nodelist.*
+             pkunzip region33
+             except (region33.zip) ren region*.* nodelist.*
+             cd \point\om
+             cls
+             om nodelist
+             cd \point\golded goldnode -f
+             goto fine
+
+
+
+
+
+
+
+
+
+
+
+                                                                       40
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+             Rem --------------------------------------------------
+             Rem   termina l'esecuzione disattivando i fossili
+             Rem   e ripristinando la directory iniziale
+             Rem --------------------------------------------------
+
+             :quit
+             video_d
+             bnu /u
+             :fine
+             popd
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       41
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                                     LO SHAREWARE
+
+
+             Avrai probabilmente sentito i termini "pubblico dominio",
+             "freeware", "shareware" ed altri simili. I BBS e i
+             rivenditori di software hanno molti programmi
+             contraddistinti da una o piu' di queste parole.
+             Purtroppo esiste parecchia confusione tra i loro
+             significati, anche se ciascuno di loro ha delle precise
+             connotazioni. Una volta capito il vero significato sara'
+             molto piu' facile orientarsi nel labirinto dei programmi
+             disponibili e capire quali obblighi si contraggono o meno
+             con i vari tipi di programma.
+             Ora analizzeremo nel dettaglio i termini piu' comuni.
+
+             "Pubblico Dominio" o "Public Domain"
+             Significa che il creatore del lavoro (in questo caso un
+             programma, ma anche la sua documentazione...) che ha la
+             proprieta' legalmente riconosciuta sull'opera dedica il suo
+             lavoro al "pubblico dominio". Una volta che qualcosa e' nel
+             pubblico dominio chiunque la puo' utilizzare nel modo che
+             crede e l'autore perde il controllo sull'uso del suo lavoro
+             e non puo' chiedere nulla in cambio di questo uso.
+             Se trovi un programma che sia stato ESPLICITAMENTE
+             rilasciato al pubblico dominio sei libero di usarlo come
+             meglio credi senza dover niente a nessuno.
+             Bisogna fare attenzione pero' a non confondere questo tipo
+             di diffusione con la diffusione a titolo gratuito di
+             programmi coperti da copyright la cui tutela legale verra'
+             affrontata in seguito: sono di "pubblico dominio" solo le
+             opere esplicitamente dichiarate di "pubblico dominio";
+             qualora non si trovasse alcuna indicazione in tal senso
+             l'opera e' legalmente sottoposta a tutela.
+
+             "Copyright"
+             Un opera (quindi anche un programma) coperta da copyright
+             e' sottoposta al controllo da parte dell'autore che attesta
+             questo diritto ponendo una annotazione all'interno
+             dell'opera stessa.
+             La legge concede ampi diritti al creatore dell'opera di
+             stabilire i modi e condizioni di diffusione dell'opera
+             stessa e prevede pene per chi viola queste restrizioni.
+             Se trovi un programma protetto da copyright sei tenuto a
+             seguire le direttive dell'autore circa le modalita' di
+             diffusione e di pagamento per l'utilizzo del programma in
+             oggetto. Di solito queste sono ben in evidenza nella
+             documentazione.
+             Il fatto che un programma sia coperto da copyright non
+             significa affatto che si richieda il pagamento di una somma
+             per il suo utilizzo: e' perfettamente lecito permettere la
+             distribuzione e l'uso gratuito di un programma protetto da
+
+
+
+
+                                                                       42
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+             copyright, ma questo non significa che il programma stesso
+             sia di pubblico dominio.
+
+             "Shareware"
+             I programmi definiti shareware sono programmi PROTETTI DA
+             COPYRIGHT che vengono diffusi attraverso BBS, rivenditori
+             di software e con scambio di copie tra amici. Trattasi di
+             software commerciale di cui e' permessa la prova a titolo
+             gratuito prima dell'acquisto.
+             Questo fa dello "shareware" la migliore garanzia
+             "soddisfatti o rimborsati" che si possa concedere ad un
+             cliente.
+
+             Questo programma e' distribuito con il metodo "Shareware"
+
+             Molte garanzie "soddisfatti o rimborsati" funzionano nel
+             seguente modo: si paga per il prodotto si ha un certo
+             periodo di tempo per provarlo e verificare se soddisfa le
+             proprie aspettative o meno.
+             Se si decide di restituire il prodotto bisogna restituirlo
+             (nelle condizioni originali) ed a questo punto (a volte
+             anche aspettando dei mesi) si ottiene il rimborso della
+             somma pagata.
+             C'e' anche chi non vuole che il proprio prodotto sia
+             provato: allora si intima che per avere il rimborso la
+             busta contenente i dischetti sia integra; con questo tipo
+             di licenza si ha diritto al rimborso solo se non si e'
+             provato il programma: una vera assurdita'!
+
+             Il metodo "shareware" e' molto differente. Con esso si
+             ottiene il programma da provare per un limitato periodo di
+             tempo senza dover sborsare una lira. Si e' in grado di
+             provare il programma sul proprio calcolatore e nella
+             propria particolarissima configurazione. Se si decide di
+             non usarlo, qualsiasi sia il motivo, semplicemente si getta
+             via e ce ne si dimentica del tutto.
+             Non sono necessari carteggi, costose telefonate interurbane
+             o raccomandate che farebbero perdere tempo prezioso.
+             Se invece continuerai ad utilizzare il programma allora, ma
+             solo allora, sei tenuto a pagare per esso.
+
+             Lo Shareware e' un metodo di distribuzione, non un tipo di
+             software. I programmi distribuiti come shareware sono dello
+             stesso livello di quelli distribuiti dai normali canali
+             commerciali: ci possono essere programmi shareware validi o
+             scadenti esattamente come ci sono programmi commerciali
+             validi o scadenti. La principale differenza e' che con lo
+             shareware puoi sapere PRIMA di pagare se il programma e'
+             buono o meno.
+
+             Come utilizzatore di software tu hai il vantaggio di poter
+             provare il programma prima di pagarlo, come autore si ha la
+
+
+
+
+                                                                       43
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+             possibilita' di dare ad un prodotto un ampia diffusione
+             senza dover affrontare spese all'ordine delle centinaia di
+             milioni per la promozione. Questo fatto fa si che il prezzo
+             del programma risulti molto concorrenziale per chi lo
+             acquista.
+             Oggi ci sono molti programmi sul mercato che non avrebbero
+             visto la luce o non sarebbero mai arrivati fino a te se non
+             fosse esistito questo strumento di marketing.
+
+             La sopravvivenza dello shareware e dei programmi
+             distribuiti con queste modalita' e' completamente nelle TUE
+             mani: solo se tu supporterai questo tipo di distribuzione,
+             diffondendo le copie ai tuoi amici e pagando le
+             registrazioni gli autori dei programmi shareware potranno
+             continuare lo sviluppo e il supporto dei programmi.
+
+             Non affondare un'idea intelligente!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       44
+
+
+                                               CASASOFT ObjectMatrix 2.00
+
+
+
+                                    Riconoscimenti
+
+
+             I seguenti nomi, utilizzati nella documentazione, sono
+             marchi, o creazioni delle persone o aziende citate.
+
+             * Fido, Fidonet : Tom Jennings, Fido Software
+             * MS-DOS : Microsoft Corporation
+             * TurboPascal : Borland Inc.
+             * MBUtil : Gerard van der Land
+             * IBM, PC-DOS : IBM Corporation
+             * ARCmail : Thom Henderson, SEA Inc.
+             * Dutchie : Henk Wevers
+             * BinkleyTerm : Vince Perriello, Bob Hartman, Alan D.
+             Applegate; Bit Bucket Software Co.
+             * WMail : Silvan Calarco
+             * Kick : Angelo Ghigi
+             * LzExe : Maurice Bellard
+             * Lora CBIS : Marco Maccaferri
+
+             Spero di non aver dimenticato nessuno!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       45

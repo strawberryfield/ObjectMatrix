@@ -1,0 +1,63 @@
+Elenco delle versioni di ObjectMatrix e relative differenze
+
+--  1.00/beta
+Prima versione ufficialmente rilasciata
+
+--  1.01/beta
+Riscritta tutta la parte di lettura e scrittura di messaggi e pacchetti
+Aggiunta una linea di REPLY nelle risposte a messaggi con MSGID
+Aggiunta linea FLAG
+Aggiunta la configurazione della directory di inbound
+Aggiunta l'opzione per importare pacchetti
+Inserita chiave di registrazione
+
+--  1.10
+Uso del product code ufficiale 0xAB (171)
+Identificazione dei packer dei pacchetti importati
+Supporto memoria EMS
+Gestione f/req e f/attach
+Aggiunta opzione CLEANOUT
+Packing automatico
+Utilizzo del file di configurazione di Wmail
+Assegnazione automatica pointnet
+Corretti alcuni bug nel controllo degli indirizzi
+Completato il packer
+Genera RR richiesti con la stringa '*RR*' nel subject
+
+--  1.20
+Elaborazione nodelist
+Opzione Adjust
+Supporto zone multiple
+
+--  1.30
+Aggiunta opzione RENUM
+Log degli errori di esecuzione
+Gestione degli errorlevel in uscita
+Aggiunta opzione PURGE
+Possibilita' di routare i messaggi ad un nodo diverso dal boss di default
+Aggiunta opzione DISKMAIL
+Gestione sistema di help di MsDos 5.00
+
+--  1.32
+Aggiunta interfaccia grafica con supporto del mouse
+Aggiunta opzione DUMP
+Nuova gestione Help e file linguaggio
+Nuove opzioni nella compilazione delle nodelist
+
+-- 1.40
+Corretto un bug nella gestione della memoria EMS
+File di configurazione in stile Windows
+Riscritto interamente il packer con un nuovo e piu' veloce sistema di indici
+Aggiunta una opzione per creare un pacchetto di poll fittizio
+Macro inserite nel file di configurazione
+Corretto un bug nelle finestre di dump che impediva l'help
+Gestione della base messaggi QuickBBS
+Inserita linea di stato con suggerimenti
+Aggiunto orologio e indicatore di memoria libera
+
+-- 2.00
+Possibilita' di personalizzare il desktop
+Completo sistema per l'esame di pacchetti e messaggi
+Possibilita' di utilizzare schermi a 43/50 linee
+Supporto per OS/2 2.0
+Corretto un bug che non permetteva di importare messaggi vuoti

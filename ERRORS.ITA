@@ -1,0 +1,66 @@
+;        CASASOFT Language Compiler - (c) 1992 Roberto Ceccarelli
+;
+;
+;-------------------------------------------------------------------------
+;  Definizione errori di runtime
+;-------------------------------------------------------------------------
+;
+;   Errori DOS
+;
+1,Funzione DOS sconosciuta
+2,File non trovato
+3,Percorso non trovato
+4,Troppi files aperti
+5,Acceso al file negato
+6,Handle non valido
+12,Modo di accesso al file non consentito
+15,Drive inesistente
+16,Non si puo' rimuovere la directory corrente
+17,Rename interdrive non consentito
+;
+;    Errori di I/O
+;
+100,Errore in lettura da disco
+101,Errore in scrittura su disco
+102,File non assegnato
+103,File non aperto
+104,File non aperto per la lettura
+105,File non aperto per la scrittura
+106,Formato numerico non esatto
+;
+;    Errori critici
+;
+150,Disco protetto da scrittura
+151,Periferica sconosciuta
+152,Disco non pronto
+153,Comando sconosciuto
+154,Errore di CRC
+155,Errore nella chiamata al drive
+156,Errore nella ricerca delle tracce
+157,Supporto magnetico di tipo sconosciuto
+158,Settore non trovato
+159,Fine carta
+160,Errore di scrittura
+161,Errore di lettura
+162,Errore harware
+;
+;    Errori fatali
+;
+200,Divisione per zero
+201,Errore di range
+202,Stack overflow
+203,Heap overflow
+204,Operazione su puntatore non consentita
+205,Overflow in operazione in virgola mobile
+206,Underflow in operazione in virgola mobile
+206,Operazione in virgola mobile non consentita
+208,Overlay manager non installato
+209,Errore nella lettura del file di overlay
+210,Oggetto non inizializzato
+211,Chiamata ad un metodo astratto
+212,Registrazione di oggetto non corretta
+213,Indice di collection fuori range
+214,Collection overflow
+;
+;-------------------------------------------------------------------------
+;       End of language definition!

@@ -1,0 +1,726 @@
+.topic Global=0
+
+   ***    Help Globale   ***
+
+Uso: OM [opzione [parametri]]
+
+Le varie opzioni sono raggiungibili direttamente da linea di comando
+o da questa interfaccia grafica per un uso interattivo dove si possono
+trovare raggruppate nei seguenti menu:
+
+ * {SYSTEM}      Gestione del programma
+ * {PACKER}      Opzioni relative alla creazione e gestione pacchetti
+ * {MAINTENANCE} Funzioni per la gestione dell'area matrix
+ * {DUMP}        Stampa del contenuto di pacchetti e messaggi
+ * {POSTING}     Procedure per l'inserimento di messaggi, attach e request
+ * {QUICKBASE}   Gestione della base messaggi Quick
+ * {NODELIST}    Funzione di compilazione della nodelist
+
+Selezionare il menu di proprio interesse con il mouse o con il tasto
+di tabulazione per maggiori informazioni sulle singole opzioni.
+
+Vedere {HelpOnHelp} per informazioni sull'uso dell'help; selezionare
+{HelpIndex} per l'elenco completo dei comandi.
+
+.topic Packer=2002
+
+                -----  Gestione dei pacchetti posta  -----
+
+ * {PACK}         crea i pacchetti dei messaggi in partenza
+ * {UNPACK}       importa i pacchetti
+ * {CLEANOUT}     cancella i messaggi spediti
+ * {DISKMAIL}     per portare via la posta su dischetto
+ * {KILLPACKETS}  cancella i pacchetti in outbound
+ * {FORCEPOLL}    crea un pacchetto per forzare il poll
+
+.topic Maintenance=2003
+
+                   -----  Manutenzione messaggi  -----
+
+ * {RENAME}   cambia il nome del destinatario nei msg in arrivo
+ * {REPLY}    genera le "ricevute di ritorno"
+ * {ADJUST}   sistema zone e point
+ * {RENUM}    rinumera i messaggi
+ * {PURGE}    manutenzione directory netmail
+
+.topic Posting=2005
+
+                    -----  Generazione messaggi  -----
+
+ * {POST}     crea un messaggio
+ * {REQUEST}  crea file request
+ * {ATTACH}   crea file attach
+ * {KILL}     cancella messaggi inutili
+
+.topic Dump=2006
+
+                 ----- Esame pacchetti e messaggi -----
+
+ * {MSG}         messaggi nella directory di mail
+ * {LISTPACKETS} lista dei pacchetti generati da OM con collegamenti
+ * {INBOUND}     contenuto dei pacchetti in arrivo
+ * {OUTBOUND}    contenuto dei pacchetti in partenza
+
+
+.topic Pack=1020
+
+                       Opzione Pack
+
+
+Uso:  PACK [schedulename]
+
+Prepara i pacchetti di posta, i file attach e i file
+request da utilizzarsi in un ambiente tipo BinkleyTerm.
+
+Il routing segue le seguenti regole:
+- I file requests sono impacchettati direttamente per il
+nodo di destinazione; vengono rifiutati se il nodo mittente
+risulta diverso dal proprio.
+L'eventuale testo del messaggio non viene trasmesso.
+
+- I messaggi in partenza dal proprio nodo con priorita'
+diversa da Normal sono impacchettati direttamente per il
+nodo di destinazione con la priorita' assegnata.
+Nel caso di messaggio crash diretto ad un point questo
+verra' ruotato al relativo boss
+
+- I messaggi con priorita' Normal e tutti i messaggi
+provenienti da altri nodi subiscono questi trattamenti:
+-- Se il nodo di destinazione e' indicato nelle liste dei
+Crash, NoRoute od Hold viene impacchettato per il suddetto
+nodo con la priorita' richiesta.
+Fare attenzione che in questo caso e' possibile mandare
+messaggi crash direttamente ai point senza redirezione al
+boss!
+-- Se il nodo di destinazione non e' specificato in nessuna
+di queste liste allora il messaggio viene inviato
+all'uplink con la priorita' eventualmente assegnata a
+quest'ultimo (se invece non viene assegnata alcuna
+priorita' all'uplink si considera in Normal)
+
+I messaggi cui e' attaccata l'arcmail non vengono
+impacchettati, ma viene spedito il relativo file. Essi
+vengono individuati controllando l'estensione del file
+attaccato che nel caso specifico e' nella forma
+mo?|tu?|we?|th?|fr?|sa?|su?
+
+Nei messaggi di file request e di attach e' possibile
+specificare piu' di un file da richiedere o da trasmettere.
+
+Qualora fossimo nella necessita' di forzare una chiamata
+verso un nodo anche se non c'e' posta in partenza potra'
+essere utilizzata la funzione {FORCEPOLL} descritta piu'
+avanti.
+
+
+.topic Kill=1050
+
+   ***    Help Opzione Kill   ***
+
+Uso: KILL [mittente]
+
+Cancella tutti i messaggi pervenuti con mittente indicato
+se il parametro manca si usano i nomi definiti nel file di configurazione
+e se non specificato niente "ArcMail" per default
+
+I controlli sono case-insensitive, riguardano solo la parte iniziale della
+stringa ed eventuali spazi vanno indicati con il carattere di sottolineatura
+
+.topic Purge=1150
+
+   ***    Help Opzione Purge   ***
+
+Uso: PURGE S[ent] | R[eceived]
+
+Cancella i messaggi che hanno settato il flag richiesto.
+Puo' essere specificata la sola iniziale del nome del flag,
+il controllo e' case-insensitive
+
+.topic ForcePoll=1115
+
+   ***    Help Opzione ForcePoll   ***
+
+Uso: FORCEPOLL address
+
+Se per il nodo in argomento non ci sono pacchetti con priorita' crash
+ne viene creato uno vuoto per forzare il mailer a chiamare.
+
+Viene usato principalmente negli eventi in cui si debba pollare un uplink
+anche se non si ha niente da spedire, ma presumibilmente c'e' posta
+in attesa.
+
+Se la chiamata avviene il pacchetto sara' cancellato dal mailer, altrimenti
+potra' essere eliminato da un comando {KillPackets} al termine dell'evento.
+
+.topic Post=1070
+
+   ***    Help Opzione Post   ***
+
+Uso: POST destinatario indirizzo soggetto file
+
+Tutti i campi sono obbligatori.
+Eventuali spazi vanno indicati con il carattere di sottolineatura
+
+.topic Reply=1040
+
+   ***    Help Opzione Reply   ***
+
+Non richiede parametri.
+
+I messaggi generati hanno come mittente il nome del SysOp e come
+destinatario il mittente originale.
+
+Sono posti nella directory della posta per essere successivamente
+impacchettati.
+
+.topic UnPack=1080
+
+   ***    Help Opzione Unpack   ***
+
+Uso: UNPACK [inbounddir]
+
+Il parametro e' accettato solo nelle versioni registrate
+Se non specificato si usa la directory del file di configurazione
+e se non e' definita neanche quella si usa la corrente.
+
+.topic Attach=1100
+
+   ***    Help Opzione Attach   ***
+
+Uso: ATTACH indirizzo file [ Hold|Crash|Normal [ None|Truncate|KillSent ]]
+
+Le opzioni di priorita' e di trattamento possono essere anche abbreviate
+con la sola iniziale.
+
+Se la priorita' non e' indicata si usa Hold per default
+Il trattamento di default e' None; Truncate e KillSent funzionano
+solo in modalita' AutoPack.
+Non si puo' specificare un trattamento senza indicare anche la priorita'
+
+Specificare il percorso completo del file.
+
+.topic Request=1090
+
+   ***    Help Opzione Request   ***
+
+Uso: REQUEST indirizzo file
+
+Tutti i campi sono obbligatori.
+
+Richiede il file indicato (puo' essere anche un magic) all'indirizzo
+specificato.
+
+.topic CleanOut=1110
+
+   ***    Help Opzione CleanOut   ***
+
+Non richiede parametri
+
+Cancella i messaggi contenuti nei pacchetti effettivamente spediti.
+Dovrebbe essere usata dopo ogni sessione posta del mailer.
+
+.topic KillPackets=1111
+
+   ***    Help Opzione KillPackets   ***
+
+Non richiede parametri
+
+Cancella tutti i pacchetti creati dal packer in modo che quest'ultimo
+possa ricrearli secondo le esigenze del nuovo evento.
+Dovrebbe essere usata prima ogni chiamata alla funzione {PACK}.
+
+.topic Adjust=1130
+
+   ***    Help Opzione Adjust   ***
+
+Non richiede parametri
+
+Mette negli appositi byte gli indirizzi di zona e point.
+Dovrebbe essere usata dopo ogni uso di programmi che non rispettano
+il formato FTS-0001.
+
+.topic Rename=1030
+
+   ***    Help Opzione Rename   ***
+
+uso: RENAME [original_name [new_name]]
+
+Se new_name viene omesso si usa per default il nome del sysop.
+Se new_name viene utilizzato bisogna specificare anche original_name.
+Se original_name viene omesso viene utilizzato 'SysOp' per default.
+I controlli di original_name sono fatti in modo case-insensitive.
+
+Se e' necessario inserire degli spazi questi vanno sostituiti da
+tratti di sottolineatura (_).
+
+.topic Renum=1140
+
+   ***    Help Opzione Renumber   ***
+
+Non richiede parametri
+
+Riordina la directory dei messaggi rinumerandoli a partire da 1
+
+.topic Nodelist=1120
+
+   ***    Help Opzione Nodelist   ***
+
+Non richiede parametri
+
+Crea i files della nodelist per il mailer e per ObjectMatrix
+Tutte le opzioni devono essere date nel file di configurazione
+
+.topic DiskMail=1200
+
+   ***    Help Opzione DiskMail   ***
+
+Uso: DISKMAIL address path
+
+Sposta tutta la posta (NetMail, ARCmail, f/a, TIC...) nella directory
+o disco specificato.
+La directory di destinazione si presentera', a copia ultimata, esattamente
+come la directory di inbound del nodo ricevente.
+Analogamente saranno cancellati o adeguatamente elaborati i files in
+partenza esattamente come in una sessione posta normale.
+
+Per i sistemi che utilizzano il fakenet bisogna utilizzare tale indirizzo
+e non quello completo a 4d
+
+.topic Msg=1210
+
+   ***    Help Opzione Dump Mail  ***
+
+Non richiede parametri
+
+Crea un file di testo con il contenuto e l'header dei messaggi
+presenti nella directory della matrix.
+
+Viene creato un file testo con nome MAILDUMP.OM
+e se il programma e' in modo interattivo viene aperta una finestra
+di visualizzazione.
+
+.topic Inbound=1211
+
+   ***    Help Opzione Dump Inbound  ***
+
+Non richiede parametri
+
+Crea un file di testo con il contenuto e l'header dei pacchetti
+presenti nella directory di inbound.
+
+Viene creato un file testo con nome INBOUND.OM
+e se il programma e' in modo interattivo viene aperta una finestra
+di visualizzazione.
+
+.topic Outbound=1212
+
+   ***    Help Opzione Dump Outbound  ***
+
+Non richiede parametri
+
+Crea un file di testo con il contenuto e l'header dei pacchetti
+presenti nella directory di outbound.
+
+Viene creato un file testo con nome OUTBOUND.OM
+e se il programma e' in modo interattivo viene aperta una finestra
+di visualizzazione.
+
+.topic ListPackets=1112
+
+   ***    Help Opzione PktList   ***
+
+Non richiede parametri
+
+Crea un file di testo con l'elenco dei pacchetti e flo-files
+presenti nella directory di inbound specificando per ognuno di essi
+i messaggi che hanno contribuito a formarlo nonche' il tipo di trattamento
+che sara' effettuato dall'opzione di {CleanOut}
+
+Viene creato un file testo con nome PKTLIST.OM
+e se il programma e' in modo interattivo viene aperta una finestra
+di visualizzazione.
+
+.topic QuickBase=2012
+
+                       --- Gestione QuickBase ---
+
+L'uso di queste opzioni, se associato ad un editor in grado di leggere
+messaggi in formato Quick, permette un certo numero di vantaggi:
+
+- Non vengono letti i messaggi di attach in partenza dal nostro nodo
+
+- L'area dei messaggi in formato Fido e' piu' sgombera e quindi le
+operazioni di packing sono piu' veloci
+
+- I messaggi occupano meno spazio
+
+- I BBS utilizzanti solo la base Quick possono dare l'uso della
+matrix anche agli utenti
+
+Le opzioni a disposizione sono
+
+ * {EXPORT:qbexport}
+ * {IMPORT:qbimport}
+ * {RESCAN:qbrescan}
+
+.topic qbexport=1220
+
+   ***  Help opzione QuickBase Export  ***
+
+Uso: QUICKBASE EXPORT
+
+Copia i messaggi matrix marcati unsent dalla base Quick alla directory
+dei messaggi in formato Fido per i successivi trattamenti.
+
+Il messaggio originale viene lasciato intatto ad eccezione del flag di
+Pending NetMail Export che viene azzerato
+
+.topic qbrescan=1225
+
+   ***  Help opzione QuickBase Rescan  ***
+
+Uso: QUICKBASE RESCAN
+
+Copia i messaggi matrix marcati Local dalla base Quick alla directory
+dei messaggi in formato Fido per i successivi trattamenti.
+
+Il messaggio originale viene lasciato intatto.
+
+Attenzione: usare questa opzione con molta cautela in quanto puo'
+generare un notevole numero di duplicati.
+Per normali applicazioni si consigli l'opzione {EXPORT:qbexport}
+
+.topic qbimport=1230
+
+   ***  Help opzione QuickBase Import  ***
+
+Uso: QUICKBASE IMPORT
+
+Copia i messaggi matrix diretti al proprio nodo (aka inclusi) nella base
+Quick qualunque sia il destinatario.
+Per evitare che vengano importati anche i matrix di attach dei robot e dei
+mail processor e' consigliabile eseguire prima di questa la funzione {KILL}
+
+Il messaggio originale viene cancellato.
+
+.topic Viewer=3000
+
+  --- Utilizzo delle finestre di visualizzazione ---
+
+Il testo all'interno della finestra puo' essere raggiunto con il mouse
+utilizzando le apposite scroll-bar ai lati oppure con i seguenti tasti:
+
+  Su       : Sale una riga
+  Giu'     : Scende una riga
+  Destra   : Mostra una nuova colonna a destra
+  Sinistra : Mostra una nuova colonna a sinistra
+  Pag.Su   : Sale di una pagina
+  Pag.Giu' : Scende di una pagina
+  Inizio   : Si porta alla prima colonna di una riga
+  Fine     : Raggiunge l'ultima colonna della riga
+  Ctrl-Pag.Su   : Va all'inizio del file
+  Ctrl-Pag.Giu' : Va alla fine del file
+
+La finestra puo' poi subire un {ridimensionamento:Dragging} tramite il
+mouse o l'hot-key Ctrl-F5.
+
+.topic Dragging=1
+
+  --- Ridimensionamento della finestra ---
+
+La finestra puo' essere spostata clickando con il mouse sulla barra del
+titolo oppure ridimensionata utilizzando l'angolo in basso a destra.
+
+Se non si dispone del mouse si possono ottenere le stesse funzioni utilizzando
+la tastiera si puo' attivare la modalita' di dimensionamento con
+l'hot-key Ctrl-F5 e poi utilizzare i tasti cursore. Normalmente spostano la
+finestra; se utilizzati assieme al tasto Shift la ridimensionano.
+
+La pressione del tasto Enter confermera' le scelte, ESC le annullera'
+
+.topic System=3050
+                       -----  Utilita' varie  -----
+
+ * {ABOUT}    informazioni su ObjectMatrix
+ * {DESKTOP}  menu per la personalizzazione del sistema
+ * {WINDOWS}  menu di gestione delle finestre
+ * {REMARK}   inserisce una nota nel logfile
+ * {DOSSHELL} uscita temporanea al dos
+ * {EXIT}     fine lavoro!
+
+.topic Remark=3002
+
+   ***    Help Opzione Remark   ***
+
+Uso: REMARK [annotazione]
+
+Inserisce una riga nel logfile con il testo specificato nel parametro
+(una riga vuota se nulla e' specificato)
+
+Gli eventuali spazi vanno indicati con il carattere di sottolineatura
+
+.topic About=3005
+
+Finestra di informazioni su CASASOFT ObjectMatrix.
+
+Veramente non e' che sia di grande utilita', ma poiche' lo fanno tutti...
+
+.topic DosShell=3001
+
+Uscita temporanea al dos
+
+Permette di utilizzare il dos lasciando temporaneamente residente ObjectMatrix
+che occupa circa 200k della memoria base.
+
+Utile per interventi "al volo" con programmi esterni evitando di dover
+ricaricare tutto il programma.
+
+.topic Exit=3099
+
+Uscita definitiva dal programma.
+
+La stessa funzione e' attivabile anche mediante l'hot-key Alt-X o clickando
+con il mouse sulla barra di stato.
+
+.topic Desktop=3051
+
+               ----- Funzioni di personalizzazione -----
+
+Attraverso questo sottomenu e' possibile variare l'impostazione
+dell'interfaccia utente; ovviamente tali funzioni non sono disponibili
+in modo batch
+
+ * {VideoMode}    Passa da 25 a 43/50 linee e viceversa
+ * {Colors}       Seleziona i colori per le finestre
+ * {Mouse}        Setta le caratteristiche del mouse
+ * {SaveOptions}  Salva su disco le impostazioni correnti
+ * {LoadOptions}  Carica una impostazione da disco
+
+.topic VideoMode=3006
+
+Quando sul sistema e' installata una scheda video EGA si possono
+visualizzare sullo schermo 43 linee (50 se e' una VGA) invece delle
+normali 25.
+
+Questa opzione permette di selezionare le due modalita'.
+
+Ovviamente non funziona qualora si sia configurata la scheda per lavorare
+come CGA e guadagnare cosi' 96k di memoria dos (questo e' possibile
+ad esempio con OS/2)
+
+L'impostazione potra' essere salvata utilizzando il comando
+{SaveOptions}
+
+.topic Colors=3004
+
+Attiva un box di dialogo attraverso il quale scegliere i colori
+per gli oggetti sullo schermo.
+
+Tale impostazione potra' essere salvata utilizzando il comando
+{SaveOptions}
+
+.topic Mouse=3003
+
+Attiva un box di dialogo attraverso il quale scegliere tutte le
+impostazioni per il mouse.
+
+Tali impostazioni potranno essere salvate utilizzando il comando
+{SaveOptions}
+
+.topic SaveOptions=3007
+
+Salvataggio desktop
+
+Appare una finestra di dialogo attraverso la quale scegliere il file
+in cui salvare le impostazioni grafiche correnti.
+
+Normalmente il file avra' estensione .DSK ed in particolare il file
+OM.DSK, se presente, verra' letto durante l'attivazione della modalita'
+interattiva.
+
+Verranno salvati la {modalita' testo:videomode},
+lo schema dei {colori:colors}, le impostazioni del {mouse}
+
+.topic LoadOptions=3008
+
+Caricamento desktop
+
+Appare una finestra di dialogo attraverso la quale scegliere il file
+da cui prelevare le impostazioni grafiche.
+
+Normalmente il file avra' estensione .DSK
+
+Verranno caricati la {modalita' testo:videomode},
+lo schema dei {colori:colors}, le impostazioni del {mouse}
+
+.topic Windows=3053
+
+ --- Menu di gestione finestre ---
+
+Attraverso questo menu si possono ottenere le seguenti funzioni sulle
+finestre presenti nell'applicazione:
+
+ * {Tile}       Affianca le finestre
+ * {Cascade}    Impila le finestre
+ * {Resize}     Ridimensiona la finestra corrente
+ * {Zoom}       Porta la finestra alla massima dimensione
+ * {Next}       Passa alla finestra successiva
+ * {Close}      Chiude la finestra corrente
+
+.topic Tile=3030
+
+ --- Affiancamento finestre ---
+
+Questa opzione permette di sistemare automaticamente tutte le finestre
+aperte l'una affiancata all'altra, settando le opportune dimensioni.
+
+Una disposizione alternativa puo' essere ottenuta con il comando {Cascade}
+
+.topic Cascade=3031
+
+ --- Impilamento finestre ---
+
+Questa opzione permette di sistemare automaticamente tutte le finestre
+aperte l'una sovrapposta all'altra mostrando solo la cornice superiore
+di quelle sottostanti.
+
+Una disposizione alternativa puo' essere ottenuta con il comando {Tile}
+
+.topic Resize=3032
+
+ --- Ridimensionamento finestra ---
+
+Attivando questa opzione si puo' ridimensionare la finestra corrente o
+si puo' spostarla sullo schermo.
+
+L'opzione di ridimensionamento puo' essere ottenuta anche con il mouse
+utilizzando l'angolo in basso a sinistra della finestra.
+
+Lo spostamento puo' essere invece ottenuto trascinando la barra del titolo.
+
+Maggiori informazioni sui tasti da utilizzare sono descritte alla voce
+{Dragging}
+
+.topic Zoom=3033
+
+Questa opzione permette di portare la finestra a tutto schermo, o se gia' e'
+di questa dimensione riportarla alla dimensione precedente.
+
+Analoga funzione e' ottenibile facendo click con il mouse sull'icona a destra
+in alto.
+
+.topic Next=3034
+
+Attraverso questa funzione si puo' passare alla finestra successiva che verra'
+cosi' portata in primo piano.
+
+Lo stesso comando puo' essere ottenuto con l'hot-key F6
+
+La funzione opposta e' svolta dal comando {Prev}
+
+.topic Prev=3036
+
+Attraverso questa funzione si puo' passare alla finestra precedente che verra'
+cosi' portata in primo piano.
+
+Lo stesso comando puo' essere ottenuto con l'hot-key Shift-F6
+
+La funzione opposta e' svolta dal comando {Next}
+
+.topic Close=3035
+
+Permette di chiudere la finestra corrente.
+
+Analoga funzione e' ottenibile facendo click con il mouse sull'icona a sinistra
+in alto.
+
+.topic HelpOnHelp=10000
+
+ -- Come usare l'help in linea --
+
+Puo' essere interrogato in tre modi distinti, corrispondenti a diverse
+condizioni di utilizzo dell'utente.
+
+Modo context-sensitive: e' sufficiente premere il tasto F1 o fare click
+con il mouse sulla scritta Help sulla barra di stato.
+In tal modo verra' dato un aiuto circa la funzione correntemente selezionata.
+
+Modo reference: viene mostrato l'elenco alfabetico di tutte le voci presenti
+nel file di aiuto; e' possibile scegliere una voce con il mouse o selezionarla
+con i tasti Tab e Shift-Tab e poi premendo Enter
+
+Modo menu-driven: le informazioni vengono selezionate attraverso menu
+successivi la cui struttura ricalca quella dell'applicazione.
+
+
+All'interno delle videate possono apparire alcune voci evidenziate; queste
+possono essere selezionate premendo i tasti Tab o Shift-Tab e la voce
+selezionata puo' essere visionata premendo il tasto di Invio.
+Analoga selezione puo' essere fatta con un colpo di mouse.
+
+La finestra dell'help puo' subire un {ridimensionamento:Dragging} esattamente
+come qualsiasi altra finestra.
+
+
+Premere ESC per uscire oppure selezionare {Menu-driven:global} o
+{Indice:HelpIndex} per attivare le specifiche modalita' di interrogazione.
+
+.topic HelpIndex=10001
+
+Elenco alfabetico degli argomenti trattati in questo help
+
+Per una visita guidata da Menu selezionare {Global}
+
+  {ABOUT}
+  {ADJUST}
+  {ATTACH}
+  {Cascade}
+  {CLEANOUT}
+  {Close}
+  {Colors}
+  {DESKTOP}
+  {DISKMAIL}
+  {DOSSHELL}
+  {Dragging}
+  {DUMP}
+  {EXIT}
+  {FORCEPOLL}
+  {HelpOnHelp}
+  {INBOUND}
+  {KILL}
+  {KILLPACKETS}
+  {LISTPACKETS}
+  {LoadOptions}
+  {MAINTENANCE}
+  {Mouse}
+  {MSG}
+  {Next}
+  {NODELIST}
+  {OUTBOUND}
+  {PACK}
+  {PACKER}
+  {POST}
+  {POSTING}
+  {Prev}
+  {PURGE}
+  {Resize}
+  {qbexport}
+  {qbimport}
+  {qbrescan}
+  {QUICKBASE}
+  {REMARK}
+  {RENAME}
+  {RENUM}
+  {REPLY}
+  {REQUEST}
+  {SaveOptions}
+  {SYSTEM}
+  {Tile}
+  {UNPACK}
+  {VideoMode}
+  {Viewer}
+  {Windows}
+  {Zoom}
+
+Selezionare la voce desiderata utilizzando il mouse o il tasto di
+tabulazione.

@@ -1,0 +1,396 @@
+;         CASASOFT ObjectMatrix - (c) 1991,1992 Roberto Ceccarelli
+;
+;                       Language file italiano
+; ---------------------------------------------------------------------------
+;
+;
+; Definizioni globali
+;
+10,Opzione sconosciuta "%s" in linea comandi
+11,Elaborati %d messaggi
+12,Errore di esecuzione %d all'indirizzo %04x:%04x
+13,Esco con codice %d
+14,La funzione %s richiede un minimo di %d parametri
+15,Inizio script "%s"
+16,Script "%s" non trovato
+;
+; Modulo packer
+;
+20,Creazione pacchetti posta
+21,Messaggio per %s su %s
+22,Richiesta di "%s" su %s
+23,File %s per %s
+24,Zona %d non supportata
+25,Forward di file-request non consentito
+26,Point %s non supportato
+;
+; Modulo killer
+;
+50,Cancello messaggi con mittente "%s"
+51,Cancello messaggio da %s per %s
+52,Cancello messaggi inutili
+53,Trovato messaggio con mittente "%s"
+54,Cancellato il file %s
+55,Cancellati %d files
+56,Troncati %d files
+57,Troncato il file %s
+58,File %s non trovato
+;
+;  Modulo Purge
+;
+150,Cancello messaggi con flag 'Sent'
+151,Cancello messaggi con flag 'Received'
+;
+; Modulo Post
+;
+70,Preparato messaggio per %s su %s
+;
+; Modulo reply
+;
+40,Creazione "ricevute di ritorno"
+41,Conferma ricezione messaggio
+42,E' stato ricevuto il tuo messaggio del
+43,Risposta per %s su %s
+44,Per questo messaggio e' stata generata una Ricevuta di Ritorno
+;
+; Modulo unpacker
+;
+80,Importazione pacchetti posta
+81,Pacchetto %s da %s
+82,Messaggio da %s per %s
+83,Importati %d messaggi
+84,Importati %d pacchetti
+85,Importati %d messaggi in totale
+86,Generato dal programma "%s" codice %s
+87,Header esteso tipo 2+
+;
+; Modulo Attach
+;
+100,Spedisco il file %s a %s
+;
+; Modulo Request
+;
+90,Messaggio con richiesta di "%s" a %s
+;
+; Modulo CleanOut
+;
+110,Cancello messaggi spediti
+111,Cancello pacchetti posta
+112,Dump dei collegamenti tra pacchetti e messaggi
+115,Creo pacchetto fittizio per pollare %s
+;
+; Modulo Adjust
+;
+130,Aggiusto indirizzi a 4d
+;
+; Modulo renamer
+;
+30,Sostituzione di "%s" con "%s"
+31,Rinomino messaggio da %s per %s
+;
+; Modulo Renumber
+;
+140,Rinumero i messaggi
+;
+; Modulo Nodelist
+;
+120,Compilo la NodeList
+121,Leggo il file
+122,Aggiungo la definizione della zona principale
+123,Creo lista formato testo
+124,Creo files "Versione 6"
+125,Creo lista SysOp
+;
+; Modulo Diskmail
+;
+200,Esporto la posta per %s in %s
+201,Copio il file %s in %s
+202,Copiati %d bytes
+203,Copiati %d files
+204,Copiati %d bytes in totale
+;
+; Modulo Dump
+;
+210,Copio messaggi in file di testo
+211,Esamino i pacchetti in arrivo
+212,Esamino i pacchetti in uscita
+;
+; Modulo QuickBase
+;
+220,Esporto messaggi matrix da QuickBase
+221,Messaggio %d per %s
+225,Esporto tutti i messaggi matrix locali dalla QuickBase
+;
+230,Importo messaggi nella QuickBase
+231,Importo messaggio da %s per %s
+;
+; Modulo configurazione
+;
+60,Il nome del SysOp non e' definito
+61,Il nome del sistema non e' definito
+62,Non e' definita la directory dei messaggi
+63,Non e' definita la directory di outbound
+64,L'indirizzo primario non e' definito
+65,Impossibile trovare il file di configurazione "%s"
+66,Non esiste la sezione "%s" nel file di configurazione
+67,Parametro non riconosciuto nella sezione "%s"
+;
+; Modulo interattivo
+;
+501,Non trovo il file di aiuto!
+502,Scrivi EXIT per tornare...
+503,Lettura del file di configurazione...
+;
+; Hints per linea di stato
+;
+2002,Menu per le operazioni di packing
+2003,Menu per le operazioni di manutenzione
+2004,Menu di manipolazione NodeList
+2005,Menu per la creazione dei messaggi
+2006,Menu di esame pacchetti e messaggi
+2012,Menu di gestione della QuickBase
+;
+1130,Aggiusta zona e point nei messaggi
+1100,Crea file attach
+1110,Cancella i messaggi dei pacchetti spediti
+1200,Copia la posta di un nodo su dischetto
+1050,Cancella i messaggi inutili
+1150,Cancella i messaggi 'Sent' o 'Received'
+1120,Compila la NodeList
+1020,Crea i pacchetti di messaggi
+1070,Spedisce un file di testo come messaggio
+1030,Cambia il destinatario dei messaggi
+1140,Rinumera i messaggi
+1040,Crea le ricevute di ritorno
+1090,Crea un file request
+1080,Estrae i messaggi dai pacchetti ricevuti
+1210,Crea file testo con il contenuto dei messaggi
+1211,Crea testo con il contenuto dei pacchetti in arrivo
+1212,Crea testo con il contenuto dei pacchetti in partenza
+1115,Crea pacchetto fittizio per i poll
+1111,Cancella i pacchetti in outbound
+1112,Mostra i collegamenti tra pacchetti e messaggi
+1220,Esporta messaggi da QuickBase
+1225,Riesporta tutti i messaggi locali da QuickBase
+1230,Importa i messaggi per il tuo nodo in QuickBase
+;
+;  Lista product codes FTSC per CASASOFT ObjectMatrix
+;
+10000,Fido
+10001,Rover
+10002,SEAdog
+10003,WinDog
+10004,Slick-150
+10005,Opus
+10006,Dutchie
+10008,Tabby
+10010,Wolf-68k
+10011,QMM
+10012,FrontDoor
+10017,MailMan
+10018,OOPS
+10019,GS-Point
+10020,BGMail
+10025,BinkScan
+10026,D'Bridge
+10027,BinkleyTerm
+10028,Yankee
+10030,Daisy
+10031,Polar Bear
+10032,The-Box
+10033,STARgate/2
+10034,TMail
+10035,TCOMMail
+10036,Bananna
+10037,RBBSMail
+10038,Apple-Netmail
+10039,Chameleon
+10040,Majik Board
+10041,QM
+10042,Point And Click
+10043,Aurora Three Bundler
+10044,FourDog
+10045,MSG-PACK
+10046,AMAX
+10047,Domain Communication System
+10048,LesRobot
+10049,Rose
+10050,Paragon
+10051,BinkleyTerm/oMMM/ST
+10052,StarNet
+10053,ZzyZx
+10054,QEcho
+10055,BOOM
+10056,PBBS
+10057,TrapDoor
+10058,Welmat
+10059,NetGate
+10060,Odie
+10061,Quick Gimme
+10062,dbLink
+10063,TosScan
+10064,Beagle
+10065,Igor
+10066,TIMS
+10067,Isis
+10068,AirMail
+10069,XRS
+10070,Juliet Mail System
+10071,Jabberwocky
+10072,XST
+10073,MailStorm
+10074,BIX-Mail
+10075,IMAIL
+10076,FTNGate
+10077,RealMail
+10078,Lora-CBIS
+10079,TDCS
+10080,InterMail
+10081,RFD
+10082,Yuppie!
+10083,EMMA
+10084,QBoxMail
+10085,Number 4
+10086,Number 5
+10087,GSBBS
+10088,Merlin
+10089,TPCS
+10090,Raid
+10091,Outpost
+10092,Nizze
+10093,Armadillo
+10094,rfmail
+10095,Msgtoss
+10096,InfoTex
+10097,GEcho
+10098,CDEhost
+10099,Pktize
+10100,PC-RAIN
+10101,Truffle
+10102,Foozle
+10103,White Pointer
+10104,GateWorks
+10105,Portal of Power
+10106,MacWoof
+10107,Mosaic
+10108,TPBEcho
+10109,HandyMail
+10110,EchoSmith
+10111,FileHost
+10112,SFTS
+10113,Benjamin
+10114,RiBBS
+10115,MP
+10116,Ping
+10117,Door2Europe
+10118,SWIFT
+10119,WMAIL
+10120,RATS
+10121,Harry the Dirty Dog
+10122,Maximus-CBCS
+10123,SwifEcho
+10124,GCChost
+10125,RPX-Mail
+10126,Tosser
+10127,TCL
+10128,MsgTrack
+10129,FMail
+10130,Scantoss
+10131,Point Manager
+10133,Simplex
+10134,UMTP
+10135,Indaba
+10136,Echomail Engine
+10137,DragonMail
+10138,Prox
+10139,Tick
+10140,RA-Echo
+10141,TrapToss
+10142,Babel
+10143,UMS
+10144,RWMail
+10145,WildMail
+10146,AlMAIL
+10147,XCS
+10148,Fone-Link
+10149,Dogfight
+10150,Ascan
+10151,FastMail
+10152,DoorMan
+10153,PhaedoZap
+10154,SCREAM
+10155,MoonMail
+10156,Backdoor
+10157,MailLink
+10158,Mail Manager
+10159,Black Star
+10160,Bermuda
+10161,PT
+10162,UltiMail
+10163,GMD
+10164,FreeMail
+10165,Meliora
+10166,Foodo
+10167,MSBBS
+10168,Boston BBS
+10169,XenoMail
+10170,XenoLink
+10171,ObjectMatrix
+10172,Milquetoast
+10173,PipBase
+10174,EzyMail
+10175,FastEcho
+10176,IOS
+10177,Communique
+10178,PointMail
+10179,Harvey's Robot
+10180,2daPoint
+10181,CommLink
+10182,fronttoss
+10183,SysopPoint
+10184,PTMAIL
+10185,AECHO
+10186,DLGMail
+10187,GatePrep
+10188,Spoint
+10189,TurboMail
+10190,FXMAIL
+10191,NextBBS
+10192,EchoToss
+10193,SilverBox
+10194,MBMail
+10195,SkyFreq
+10196,ProMailer
+10197,Mega Mail
+10198,YaBom
+10199,TachEcho
+10200,XAP
+10201,EZMAIL
+10202,Arc-Binkley
+10203,Roser
+10204,UU2
+10205,NMS
+10206,BBCSCAN
+10207,XBBS
+10208,LoTek Vzrul
+10209,Private Point Project
+10210,NoSnail
+10211,SmlNet
+10212,STIR
+10213,RiscBBS
+10214,Hercules
+10215,AMPRGATE
+10216,BinkEMSI
+10217,EditMsg
+10218,Roof
+10219,QwkPkt
+10220,MARISCAN
+10221,NewsFlash
+10222,Paradise
+10223,DogMatic-ACB
+10224,T-Mail
+10225,JetMail
+10226,MainDoor
+;
+;-------------------------------------------------------------------------
+;       End of language definition!

@@ -1,0 +1,112 @@
+;      CASASOFT Language Compiler 1.00
+;      (c) 1992 Roberto Ceccarelli
+;
+; File contenenti le stringhe per gli accessori della scrivania
+;--------------------------------------------------------------------------
+;
+;
+; Hints linea di stato per comandi di sistema
+;--------------------------------------------------------------------------
+;
+; Funzioni di controllo desktop
+;
+3000,Sistema di aiuto
+3001,Uscita temporanea al DOS
+3002,Annotazione nel LogFile
+3003,Caratteristiche del mouse
+3004,Selezione colori interfaccia
+3005,Informazioni sul programma
+3006,Seleziona il numero di righe di schermo
+3007,Salva le impostazioni del sistema
+3008,Carica un file di definizione
+;
+; Funzioni di gestione dell'help
+;
+3020,Indice degli argomenti presenti nell'aiuto
+3021,Istruzioni per usare la funzione di aiuto
+3022,Accesso guidato da menu
+;
+; Funzioni di gestione finestre
+;
+3030,Accosta le finestre sullo schermo
+3031,Impila le finestre sullo schermo
+3032,Sposta e ridimensiona la finestra corrente
+3033,Ingrandisce al massimo la finestra corrente
+3034,Passa alla finestra successiva
+3035,Chiude la finestra corrente
+3036,Passa alla finestra precedente
+;
+; Aiuto sui menu
+;
+3050,Menu di sistema
+3051,Menu per il settaggio della grafica
+3052,Menu per il richiamo dell'help
+3053,Menu per la gestione delle finestre
+;
+3099,Uscita dal programma
+;
+; --------------------------------------------------------------------
+; Box modifica colori
+;
+100,Scrivania
+32,Colore
+;
+101,Menu
+2,Normale
+3,Disabilitato
+4,Scorciatoia
+5,Selezionato
+6,Selezionato inattivo
+7,Scorciatoia scelta
+;
+102,Box dialogo
+33,Cornice e sfondo
+34,Icone della cornice
+35,Barra scorrimento
+36,Icone scorrimento
+37,Testo
+61,Pannelli informativi
+;
+103,Etichette
+38,Normali
+39,Selezionate
+40,Scorciatoie
+;
+104,Pulsanti
+41,Normali
+42,Default
+43,Selezionati
+44,Disabilitati
+45,Scorciatoie
+46,Ombre
+;
+105,Pulsantiere
+47,Normali
+48,Selezionati
+49,Scorciatoie
+;
+106,Linee di input
+50,Normali
+51,Selezionate
+52,Frecce
+;
+107,Memorie comandi
+53,Pulsante
+54,Lati
+55,Barre scorrimento
+56,Icone scorrimento
+;
+108,Liste
+57,Normali
+58,Corrente
+59,Selezionati
+60,Divisorie
+;
+109,Visori
+8,Bordi passivi
+9,Bordi attivi
+10,Icone dei bordi
+11,Barre scorrimento
+12,Icone scorrimento
+13,Testo
+14,Testo evidenziato
